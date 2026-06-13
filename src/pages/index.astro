@@ -498,7 +498,7 @@ const navData = [
     let audioRafId;
 
     const formatTime = (secs) => {
-      if (isNaN(secs)) return "00:00";
+      if (isNaN(secs) || !isFinite(secs)) return "00:00";
       return `${Math.floor(secs / 60).toString().padStart(2, '0')}:${Math.floor(secs % 60).toString().padStart(2, '0')}`;
     };
 
@@ -520,8 +520,13 @@ const navData = [
             { src: 'https://cdn.phototourl.com/free/2026-04-11-eee19110-0750-4557-be87-830a17b948b5.jpg', sizes: '512x512', type: 'image/jpeg' }
           ]
         });
-        navigator.mediaSession.setActionHandler('play', () => { audio.play(); playBtn.click(); });
-        navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); playBtn.click(); });
+        
+        navigator.mediaSession.setActionHandler('play', () => { 
+          if (audio.paused) playBtn.click(); 
+        });
+        navigator.mediaSession.setActionHandler('pause', () => { 
+          if (!audio.paused) playBtn.click(); 
+        });
       }
     };
 
@@ -534,11 +539,24 @@ const navData = [
         playerCard.classList.add('is-playing');
         audioRafId = requestAnimationFrame(updateAudioProgress);
       } else {
-        audio.pause(); playerCard.classList.remove('is-playing'); cancelAnimationFrame(audioRafId);
+        audio.pause(); 
+        playerCard.classList.remove('is-playing'); 
+        cancelAnimationFrame(audioRafId);
       }
     };
 
-    audio.addEventListener('loadedmetadata', () => { timeTotal.textContent = formatTime(audio.duration); });
+    const initAudioDuration = () => {
+      if (audio.duration && !isNaN(audio.duration)) {
+        timeTotal.textContent = formatTime(audio.duration);
+      }
+    };
+    
+    if (audio.readyState >= 1) {
+      initAudioDuration();
+    } else {
+      audio.addEventListener('loadedmetadata', initAudioDuration);
+    }
+
     progressContainer.onclick = (e) => {
       if (!audio.duration) return;
       const clickX = e.clientX - progressContainer.getBoundingClientRect().left;
