@@ -1,11 +1,10 @@
 ---
-// TQSY's Space - Cyber Digital Identity 工业级终极完美版 (组件化 + 磁场粒子)
+// TQSY's Space - Cyber Digital Identity 工业级终极完美版 (组件化 + 磁场粒子 + Vision Pro质感 + 锁屏联动)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
-const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cfa-843a-e8ba865c9b46.webp";
+const globalIcon = "https://cdn.phototourl.com/free/2026-04-11-eee19110-0750-4557-be87-830a17b948b5.jpg";
 
-// ✨ 核心重构：数据驱动矩阵 (告别千行面条代码)
 const navData = [
   {
     category: "💻 Code & Dev",
@@ -73,9 +72,13 @@ const navData = [
       --bg-white: #fcfcfc;
       --text-dark: #1d1d1f;
       --text-gray: #86868b;
-      --glass: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(0, 0, 0, 0.05);
-      --glass-hover: rgba(0, 207, 181, 0.05);
+      
+      /* ✨ Vision Pro 级拟态折射材质 */
+      --vp-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+      --vp-glass-border: rgba(255, 255, 255, 0.15);
+      --vp-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --glass-hover: rgba(0, 207, 181, 0.08);
+      
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
       --dot-color: rgba(0, 0, 0, 0.03);
       --noise-opacity: 0.015;
@@ -87,9 +90,13 @@ const navData = [
         --bg-white: #0a0a0c;
         --text-dark: #f5f5f7;
         --text-gray: #a1a1a6;
-        --glass: rgba(30, 30, 32, 0.7);
-        --glass-border: rgba(255, 255, 255, 0.08);
+        
+        /* ✨ 深色模式 Vision Pro 级材质 */
+        --vp-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+        --vp-glass-border: rgba(255, 255, 255, 0.08);
+        --vp-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         --glass-hover: rgba(0, 207, 181, 0.15);
+        
         --dot-color: rgba(255, 255, 255, 0.02);
         --noise-opacity: 0.025;
         --particle-theme: rgba(160, 210, 200, 0.2);
@@ -167,10 +174,17 @@ const navData = [
     .category-title.show { opacity: 0.8; transform: translateY(0); }
     body.is-idle .category-title { opacity: 0.3; }
 
+    /* ✨ 升级卡片为 Vision Pro 质感 */
+    .vp-glass {
+      background: var(--vp-glass);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--vp-glass-border);
+      box-shadow: var(--vp-glass-shadow);
+    }
+
     .nav-item { 
       display: flex; align-items: center; justify-content: space-between; 
-      padding: 20px 24px; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border); border-radius: 24px; text-decoration: none; 
+      padding: 20px 24px; border-radius: 24px; text-decoration: none; 
       color: var(--text-dark); font-weight: 600; margin-bottom: 16px; opacity: 0; transform: translateY(30px);
       transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background-color 0.5s var(--ease), filter 1.5s ease-in-out;
       will-change: transform, opacity; user-select: none; -webkit-user-select: none;
@@ -183,7 +197,7 @@ const navData = [
     .nav-item.show { opacity: 1; transform: translateY(0); }
     
     @media (hover: hover) {
-      .nav-item.show:hover { transform: translateY(-4px); border-color: var(--miku-green); box-shadow: 0 10px 30px rgba(0,207,181,0.1); }
+      .nav-item.show:hover { transform: translateY(-4px); border-color: var(--miku-green); box-shadow: 0 10px 40px rgba(0,207,181,0.15); }
       .nav-item.show:hover span { color: var(--miku-green); }
       .nav-item.show:hover svg { transform: scale(1.1); color: var(--miku-green); }
     }
@@ -199,11 +213,10 @@ const navData = [
     .source-footer svg { width: 13px; height: 13px; fill: currentColor; }
     @media (hover: hover) { .source-footer a:hover { color: var(--miku-green); opacity: 1; } }
 
+    /* ✨ 升级播放器为 Vision Pro 质感 */
     .player-card { 
       position: fixed; left: 25px; bottom: 25px; width: 320px; padding: 14px; 
-      background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border-radius: 24px; border: 1px solid rgba(0,207,181,0.15); 
-      display: flex; flex-direction: column; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.08); 
+      border-radius: 24px; display: flex; flex-direction: column; gap: 12px; 
       z-index: 1000; opacity: 0; animation: slideInLeft 1.2s var(--ease) 1s forwards;
       will-change: transform, opacity; user-select: none; -webkit-user-select: none;
     }
@@ -238,13 +251,13 @@ const navData = [
     }
     body.is-bottom .contact-panel { pointer-events: auto; }
 
+    /* ✨ 升级剪贴板交互卡片为 Vision Pro 质感 */
     .email-chip { 
       --chip-x: 40px; --chip-op: 0;
-      background: var(--glass); padding: 8px 16px; border-radius: 50px; font-size: 10px; 
-      color: var(--text-gray); border: 1px solid var(--glass-border); text-decoration: none; font-family: monospace; 
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); cursor: pointer;
-      transform: translateX(var(--chip-x)); opacity: var(--chip-op);
-      transition: background 0.3s, color 0.3s, border 0.3s; user-select: none; -webkit-user-select: none;
+      padding: 8px 16px; border-radius: 50px; font-size: 10px; 
+      color: var(--text-gray); text-decoration: none; font-family: monospace; 
+      cursor: pointer; transform: translateX(var(--chip-x)); opacity: var(--chip-op);
+      transition: background 0.3s, color 0.3s, border 0.3s, transform 0.4s var(--ease); user-select: none; -webkit-user-select: none;
     }
     @media (hover: hover) {
       .email-chip:hover { background: var(--miku-green); color: white; border-color: var(--miku-green); transform: translateX(calc(var(--chip-x) - 5px)); }
@@ -295,12 +308,11 @@ const navData = [
 
   <main class="container">
     <nav class="nav-list" id="navList" aria-label="个人主页导航矩阵">
-      {/* ✨ 神级进化：Astro 数据映射渲染，一劳永逸！ */}
       {navData.map(group => (
         <>
           <div class="category-title">{group.category}</div>
           {group.items.map(item => (
-            <a href={item.url} target="_blank" rel="noopener noreferrer" class="nav-item">
+            <a href={item.url} target="_blank" rel="noopener noreferrer" class="nav-item vp-glass">
               <div class="nav-left-zone">
                 <svg viewBox="0 0 24 24"><path d={item.svg}></path></svg>
                 <span>{item.name}</span>
@@ -320,7 +332,7 @@ const navData = [
     </footer>
   </main>
 
-  <aside class="player-card" id="playerCard" aria-label="背景音乐播放器">
+  <aside class="player-card vp-glass" id="playerCard" aria-label="背景音乐播放器">
     <div class="player-upper">
       <img src="https://cdn.phototourl.com/free/2026-04-11-eee19110-0750-4557-be87-830a17b948b5.jpg" class="album-cover" alt="Miku Cover" width="44" height="44" decoding="async">
       <div class="song-info">
@@ -340,10 +352,10 @@ const navData = [
   </aside>
 
   <address class="contact-panel" id="contactPanel">
-    <div class="email-chip" data-user="tqishengyan" data-host="gmail.com">Loading...</div>
-    <div class="email-chip" data-user="3635316905" data-host="qq.com">Loading...</div>
-    <div class="email-chip" data-user="tianqishengyan_zhj" data-host="163.com">Loading...</div>
-    <div class="email-chip" data-user="tianqishengyan_zhj" data-host="outlook.com">Loading...</div>
+    <div class="email-chip vp-glass" data-user="tqishengyan" data-host="gmail.com">Loading...</div>
+    <div class="email-chip vp-glass" data-user="3635316905" data-host="qq.com">Loading...</div>
+    <div class="email-chip vp-glass" data-user="tianqishengyan_zhj" data-host="163.com">Loading...</div>
+    <div class="email-chip vp-glass" data-user="tianqishengyan_zhj" data-host="outlook.com">Loading...</div>
   </address>
 
   <script is:inline>
@@ -357,7 +369,6 @@ const navData = [
     ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'].forEach(evt => window.addEventListener(evt, resetIdleTimer, { passive: true }));
     resetIdleTimer();
 
-    // ✨ 核心注入：带有「磁场扰动与阻尼回弹」的 60FPS 物理引擎
     const particleCanvas = document.getElementById('particleCanvas');
     if (particleCanvas && !prefersReducedMotion) {
       const ctx = particleCanvas.getContext('2d');
@@ -365,15 +376,14 @@ const navData = [
       const RADIUS = 2.4;
       const DIAMETER = RADIUS * 2;
       const CONNECT_DISTANCE = 145;
-      const BASE_SPEED = 34; // 匀速巡航速度
+      const BASE_SPEED = 34; 
       
-      const MOUSE_RADIUS = 120; // 磁场半径
-      const MOUSE_FORCE = 400;  // 斥力推演系数
+      const MOUSE_RADIUS = 120; 
+      const MOUSE_FORCE = 400;  
 
       let width = 0; let height = 0; let dpr = 1;
       let particles = []; let rafId = null; let lastTime = performance.now();
       
-      // 追踪鼠标位置
       let mouse = { x: -1000, y: -1000 };
       window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
       window.addEventListener('mouseout', () => { mouse.x = -1000; mouse.y = -1000; });
@@ -409,31 +419,26 @@ const navData = [
         const color = getParticleColor();
 
         for (const particle of particles) {
-          // 🧲 1. 鼠标磁场斥力判定
           const dx = particle.x - mouse.x;
           const dy = particle.y - mouse.y;
           const dist = Math.hypot(dx, dy);
 
           if (dist < MOUSE_RADIUS && dist > 0) {
-            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS; // 越近斥力越强 (0~1)
+            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS; 
             particle.vx += (dx / dist) * force * MOUSE_FORCE * dt;
             particle.vy += (dy / dist) * force * MOUSE_FORCE * dt;
           }
 
-          // 🏃 2. 基础位移计算
           particle.x += particle.vx * dt;
           particle.y += particle.vy * dt;
 
-          // 🧱 3. 完美的纯光学镜面物理反射
           if (particle.x <= RADIUS) { particle.x = RADIUS; particle.vx *= -1; } 
           else if (particle.x >= width - RADIUS) { particle.x = width - RADIUS; particle.vx *= -1; }
           if (particle.y <= RADIUS) { particle.y = RADIUS; particle.vy *= -1; } 
           else if (particle.y >= height - RADIUS) { particle.y = height - RADIUS; particle.vy *= -1; }
 
-          // 🌬️ 4. 阻尼系统：被推开后优雅地“弹回匀速”
           const currentSpeed = Math.hypot(particle.vx, particle.vy);
           if (currentSpeed > 0) {
-            // 用 5% 的阻尼系数，让速度平滑过渡回 BASE_SPEED
             const newSpeed = currentSpeed + (BASE_SPEED - currentSpeed) * 0.05;
             particle.vx = (particle.vx / currentSpeed) * newSpeed;
             particle.vy = (particle.vy / currentSpeed) * newSpeed;
@@ -510,10 +515,28 @@ const navData = [
       audioRafId = requestAnimationFrame(updateAudioProgress);
     };
 
+    // ✨ 核心注入：Media Session API 原生锁屏控制
+    const setupMediaSession = () => {
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: '橙交差点',
+          artist: '初音ミク',
+          album: 'Miku Symphony',
+          artwork: [
+            { src: 'https://cdn.phototourl.com/free/2026-04-11-eee19110-0750-4557-be87-830a17b948b5.jpg', sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+        navigator.mediaSession.setActionHandler('play', () => { audio.play(); playBtn.click(); });
+        navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); playBtn.click(); });
+      }
+    };
+
     playBtn.onclick = (e) => {
       e.stopPropagation();
       if (audio.paused) {
-        audio.play().catch(() => console.warn('Audio play intercepted.'));
+        audio.play().then(() => {
+          setupMediaSession();
+        }).catch(() => console.warn('Audio play intercepted.'));
         playerCard.classList.add('is-playing');
         audioRafId = requestAnimationFrame(updateAudioProgress);
       } else {
@@ -530,11 +553,24 @@ const navData = [
       timeCurrent.textContent = formatTime(audio.currentTime);
     };
 
+    // ✨ 核心注入：剪贴板防爬交互机制
     const emailChips = document.querySelectorAll('.email-chip');
     emailChips.forEach(chip => {
       const realEmail = `${chip.getAttribute('data-user')}@${chip.getAttribute('data-host')}`;
       chip.textContent = realEmail;
-      chip.onclick = (e) => { e.preventDefault(); window.location.href = `mailto:${realEmail}`; };
+      let isCopying = false;
+      chip.onclick = (e) => { 
+        e.preventDefault(); 
+        if(isCopying) return;
+        navigator.clipboard.writeText(realEmail).then(() => {
+          isCopying = true;
+          const originalText = chip.textContent;
+          chip.innerHTML = `<span style="color: var(--miku-green); font-weight: bold;">✨ 复制成功</span>`;
+          setTimeout(() => { chip.textContent = originalText; isCopying = false; }, 2000);
+        }).catch(err => {
+          window.location.href = `mailto:${realEmail}`; // 兜底：如果浏览器禁止剪贴板，则唤醒邮件
+        });
+      };
     });
 
     const updateScrollProgress = () => {
