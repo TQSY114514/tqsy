@@ -1,8 +1,8 @@
 ---
-// TQSY's Space - Cyber Digital Identity 工业级终极完美版
+// TQSY's Space - Cyber Digital Identity 工业级终极完美版 (含 60FPS 粒子网络)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
-const siteUrl = "https://github.com/TQSY114514/tqsy114514"; // 建议后续改成你的专属顶级域名
+const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
 const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cfa-843a-e8ba865c9b46.webp";
 ---
 
@@ -44,6 +44,8 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
       --dot-color: rgba(0, 0, 0, 0.03);
       --noise-opacity: 0.015;
+      /* ✨ 混合了微弱 Miku 绿的高级粒子色 */
+      --particle-theme: rgba(80, 130, 120, 0.25); 
     }
 
     @media (prefers-color-scheme: dark) {
@@ -56,6 +58,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
         --glass-hover: rgba(0, 207, 181, 0.15);
         --dot-color: rgba(255, 255, 255, 0.02);
         --noise-opacity: 0.025;
+        --particle-theme: rgba(160, 210, 200, 0.2);
       }
     }
 
@@ -75,7 +78,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       transition: background-color 0.5s var(--ease), color 0.5s var(--ease);
     }
 
-    /* ✨ 方案 A+B：高级双星极光 + 磨砂噪点点阵网格系统 */
+    /* 🌌 升级版底层背景系统 */
     .bg-system {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;
     }
@@ -87,6 +90,9 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       position: absolute; bottom: -10%; left: -10%; width: 60vw; height: 60vh;
       background: radial-gradient(circle, rgba(0, 163, 224, 0.08) 0%, transparent 70%); 
     }
+    .particle-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+    }
     .bg-grid {
       position: absolute; inset: 0;
       background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
@@ -97,7 +103,6 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
 
-    /* ✨ 挂机时光晕不对称错位游走呼吸 */
     @keyframes aurora-1 {
       0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
       50% { transform: translate(-5%, 5%) scale(1.1); opacity: 1; }
@@ -115,7 +120,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
     }
 
     .hero { 
-      height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+      height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
       animation: heroUp 1.2s var(--ease) 0.2s both; user-select: none; -webkit-user-select: none;
     }
     .hero h1 { 
@@ -152,7 +157,6 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       user-select: none; -webkit-user-select: none;
     }
     
-    /* ✨ 规范：左侧图标与文字对齐 */
     .nav-left-zone { display: flex; align-items: center; gap: 14px; }
     .nav-item svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; transition: transform 0.4s var(--ease); }
     .nav-item span { transition: color 0.4s var(--ease); }
@@ -185,7 +189,6 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       .source-footer a:hover { color: var(--miku-green); opacity: 1; }
     }
 
-    /* ✨ 音乐播放器强化版：加入高级动态进度条系统 */
     .player-card { 
       position: fixed; left: 25px; bottom: 25px; width: 320px; padding: 14px; 
       background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -213,7 +216,6 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
     .is-playing #icon-play { display: none; }
     .is-playing #icon-pause { display: block; }
 
-    /* ✨ 进度条骨架与刻度 */
     .player-progress-zone { display: flex; flex-direction: column; gap: 4px; padding: 0 2px; }
     .progress-bar-bg { width: 100%; height: 4px; background: rgba(0,0,0,0.06); border-radius: 2px; position: relative; cursor: pointer; overflow: hidden; }
     @media (prefers-color-scheme: dark) { .progress-bar-bg { background: rgba(255,255,255,0.1); } }
@@ -279,6 +281,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
   <div class="bg-system">
     <div class="bg-glow-1"></div>
     <div class="bg-glow-2"></div>
+    <canvas id="particleCanvas" class="particle-canvas" aria-hidden="true"></canvas>
     <div class="bg-grid"></div>
     <div class="bg-noise"></div>
   </div>
@@ -470,7 +473,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
   </address>
 
   <script is:inline>
-    // 1. 静止态管理系统
+    // --- 1. 基础系统 (静止态、安全拦截) ---
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let idleTimer;
     const resetIdleTimer = () => {
@@ -485,32 +488,137 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
     );
     resetIdleTimer();
 
-    // 2. 物理防跳帧流式揭示逻辑
+    // --- 2. 纯净镜面反射 Canvas 粒子系统 ---
+    const particleCanvas = document.getElementById('particleCanvas');
+    if (particleCanvas && !prefersReducedMotion) {
+      const ctx = particleCanvas.getContext('2d');
+      const PARTICLE_COUNT = 30;
+      const RADIUS = 2.4;
+      const DIAMETER = RADIUS * 2;
+      const CONNECT_DISTANCE = 145;
+      const SPEED = 34;
+
+      let width = 0; let height = 0; let dpr = 1;
+      let particles = []; let rafId = null; let lastTime = performance.now();
+
+      const getParticleColor = () => 
+        getComputedStyle(document.documentElement).getPropertyValue('--particle-theme').trim() || 'rgba(120, 120, 128, 0.3)';
+
+      const resizeParticles = () => {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        particleCanvas.width = Math.floor(width * dpr);
+        particleCanvas.height = Math.floor(height * dpr);
+        particleCanvas.style.width = `${width}px`;
+        particleCanvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        if (particles.length === 0) {
+          particles = Array.from({ length: PARTICLE_COUNT }, () => {
+            const angle = Math.random() * Math.PI * 2;
+            return {
+              x: RADIUS + Math.random() * (width - DIAMETER),
+              y: RADIUS + Math.random() * (height - DIAMETER),
+              vx: Math.cos(angle) * SPEED,
+              vy: Math.sin(angle) * SPEED,
+            };
+          });
+        }
+      };
+
+      const stepParticles = (now) => {
+        const dt = Math.min((now - lastTime) / 1000, 0.033);
+        lastTime = now;
+
+        ctx.clearRect(0, 0, width, height);
+        const color = getParticleColor();
+
+        // 物理引擎：强制镜面反射
+        for (const particle of particles) {
+          particle.x += particle.vx * dt;
+          particle.y += particle.vy * dt;
+
+          if (particle.x <= RADIUS) {
+            particle.x = RADIUS; particle.vx *= -1;
+          } else if (particle.x >= width - RADIUS) {
+            particle.x = width - RADIUS; particle.vx *= -1;
+          }
+
+          if (particle.y <= RADIUS) {
+            particle.y = RADIUS; particle.vy *= -1;
+          } else if (particle.y >= height - RADIUS) {
+            particle.y = height - RADIUS; particle.vy *= -1;
+          }
+        }
+
+        // 连线渲染
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i]; const b = particles[j];
+            const dx = a.x - b.x; const dy = a.y - b.y;
+            const distance = Math.hypot(dx, dy);
+
+            if (distance < CONNECT_DISTANCE) {
+              const strength = 1 - distance / CONNECT_DISTANCE;
+              ctx.globalAlpha = strength * 0.75;
+              ctx.strokeStyle = color;
+              ctx.lineWidth = Math.min(DIAMETER, 1.4 * strength);
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // 粒子渲染
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = color;
+        for (const particle of particles) {
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, RADIUS, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        rafId = requestAnimationFrame(stepParticles);
+      };
+
+      resizeParticles();
+      window.addEventListener('resize', resizeParticles, { passive: true });
+
+      // 电量保护：切走屏幕立刻停止物理计算
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { cancelAnimationFrame(rafId); } 
+        else { lastTime = performance.now(); rafId = requestAnimationFrame(stepParticles); }
+      });
+
+      rafId = requestAnimationFrame(stepParticles);
+    }
+
+    // --- 3. 页面卡片滚动探测 ---
     const items = document.querySelectorAll('.nav-item, .category-title');
     const itemsArray = Array.from(items); 
-    let staggerDelay = 0;
-    let resetTimer = null;
+    let staggerDelay = 0; let resetTimer = null;
 
     const observer = new IntersectionObserver((entries) => {
       const visibleEntries = entries.filter(entry => 
         entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight
       );
       if (visibleEntries.length === 0) return;
-
       visibleEntries.sort((a, b) => itemsArray.indexOf(a.target) - itemsArray.indexOf(b.target));
 
       visibleEntries.forEach((entry) => {
         if (!entry.target.classList.contains('show')) {
-          if (prefersReducedMotion) {
-            entry.target.classList.add('show');
-          } else {
+          if (prefersReducedMotion) entry.target.classList.add('show');
+          else {
             setTimeout(() => { entry.target.classList.add('show'); }, staggerDelay);
             staggerDelay += 80; 
           }
           observer.unobserve(entry.target);
         }
       });
-
       if (!prefersReducedMotion) {
         clearTimeout(resetTimer);
         resetTimer = setTimeout(() => { staggerDelay = 0; }, 300);
@@ -518,7 +626,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
     }, { threshold: 0, rootMargin: "0px 0px -50px 0px" });
     items.forEach(item => observer.observe(item));
 
-    // 3. 强化版音频控制及高精进度条监听
+    // --- 4. 音乐播放器高精丝滑进度条 ---
     const audio = document.getElementById('mainAudio');
     const playBtn = document.getElementById('playBtn');
     const playerCard = document.getElementById('playerCard');
@@ -526,8 +634,8 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
     const timeCurrent = document.getElementById('timeCurrent');
     const timeTotal = document.getElementById('timeTotal');
     const progressContainer = document.getElementById('progressContainer');
+    let audioRafId;
 
-    // 格式化时间戳 (00:00)
     const formatTime = (secs) => {
       if (isNaN(secs)) return "00:00";
       const m = Math.floor(secs / 60).toString().padStart(2, '0');
@@ -535,101 +643,65 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       return `${m}:${s}`;
     };
 
+    const updateAudioProgress = () => {
+      if (!audio.paused && audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${pct}%`;
+        timeCurrent.textContent = formatTime(audio.currentTime);
+      }
+      audioRafId = requestAnimationFrame(updateAudioProgress);
+    };
+
     playBtn.onclick = (e) => {
       e.stopPropagation();
       if (audio.paused) {
-        audio.play().then(() => { playerCard.classList.add('is-playing'); });
+        audio.play().catch(() => console.warn('Audio play intercepted by browser.'));
+        playerCard.classList.add('is-playing');
+        audioRafId = requestAnimationFrame(updateAudioProgress);
       } else {
         audio.pause();
         playerCard.classList.remove('is-playing');
+        cancelAnimationFrame(audioRafId);
       }
     };
 
-    // 元数据加载完成时，立刻抓取音频精准总长
-    audio.addEventListener('loadedmetadata', () => {
-      timeTotal.textContent = formatTime(audio.duration);
-    });
+    audio.addEventListener('loadedmetadata', () => { timeTotal.textContent = formatTime(audio.duration); });
 
-    // 播放时间轴高精同步 (每秒刷新多帧保证丝滑)
-    audio.addEventListener('timeupdate', () => {
-      if (!audio.duration) return;
-      const pct = (audio.currentTime / audio.duration) * 100;
-      progressFill.style.width = `${pct}%`;
-      timeCurrent.textContent = formatTime(audio.currentTime);
-    });
-
-    // 支持点击进度条物理“跃迁”调准时间
     progressContainer.onclick = (e) => {
+      if (!audio.duration) return;
       const rect = progressContainer.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
-      const width = rect.width;
-      const newTime = (clickX / width) * audio.duration;
-      audio.currentTime = newTime;
+      audio.currentTime = (clickX / rect.width) * audio.duration;
+      // 立刻强制更新一次视觉，防止拖拽后跳闪
+      progressFill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+      timeCurrent.textContent = formatTime(audio.currentTime);
     };
 
-    // 4. ✨ 物理加密：防爬虫动态拼接邮件模组
+    // --- 5. 底部邮件混淆防爬系统 ---
     const emailChips = document.querySelectorAll('.email-chip');
-    
     emailChips.forEach(chip => {
-      const u = chip.getAttribute('data-user');
-      const h = chip.getAttribute('data-host');
-      const realEmail = `${u}@${h}`;
-      
-      // 网页上只显示混淆字样，彻底隔绝源码静态爬虫
+      const realEmail = `${chip.getAttribute('data-user')}@${chip.getAttribute('data-host')}`;
       chip.textContent = realEmail;
-
-      // 只有在人类真正触发点击时，才会现场激活 mailto 路由
-      chip.onclick = (e) => {
-        e.preventDefault();
-        window.location.href = `mailto:${realEmail}`;
-      };
+      chip.onclick = (e) => { e.preventDefault(); window.location.href = `mailto:${realEmail}`; };
     });
 
-    // 5. 滚动绑定算法 (Scrubbing)
     const updateScrollProgress = () => {
       const maxScroll = document.body.offsetHeight - window.innerHeight;
-      
       if (maxScroll <= 0) {
-        emailChips.forEach(chip => {
-          chip.style.setProperty('--chip-x', '0px');
-          chip.style.setProperty('--chip-op', '1');
-        });
-        document.body.classList.add('is-bottom');
-        return;
+        emailChips.forEach(chip => { chip.style.setProperty('--chip-x', '0px'); chip.style.setProperty('--chip-op', '1'); });
+        document.body.classList.add('is-bottom'); return;
       }
-
       const triggerZone = 250;
-      const startScroll = maxScroll - triggerZone;
-      const currentScroll = window.scrollY;
-
-      let progress = 0;
-      if (currentScroll >= startScroll) {
-        progress = (currentScroll - startScroll) / triggerZone;
-      }
-      progress = Math.max(0, Math.min(1, progress));
-
+      let progress = Math.max(0, Math.min(1, (window.scrollY - (maxScroll - triggerZone)) / triggerZone));
       document.body.classList.toggle('is-bottom', progress > 0);
 
       emailChips.forEach((chip, index) => {
-        if (prefersReducedMotion) {
-          chip.style.setProperty('--chip-x', '0px');
-          chip.style.setProperty('--chip-op', '1');
-          return;
-        }
-
-        const stagger = 0.15;
-        const delay = index * stagger;
-        
-        let chipProgress = Math.max(0, progress - delay) / (1 - stagger * 3);
-        chipProgress = Math.max(0, Math.min(1, chipProgress));
-
-        const easeOut = 1 - Math.pow(1 - chipProgress, 2);
-
+        if (prefersReducedMotion) { chip.style.setProperty('--chip-x', '0px'); chip.style.setProperty('--chip-op', '1'); return; }
+        const easeOut = 1 - Math.pow(1 - Math.max(0, Math.min(1, Math.max(0, progress - index * 0.15) / 0.55)), 2);
         chip.style.setProperty('--chip-x', `${40 * (1 - easeOut)}px`);
         chip.style.setProperty('--chip-op', easeOut);
       });
     };
-
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
     window.addEventListener('resize', updateScrollProgress, { passive: true });
     updateScrollProgress(); 
