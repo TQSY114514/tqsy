@@ -1,9 +1,44 @@
 ---
-// TQSY's Space - Cyber Digital Identity 工业级终极完美版 (含 60FPS 粒子网络)
+// TQSY's Space - Cyber Digital Identity 工业级终极完美版 (组件化 + 磁场粒子)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
 const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cfa-843a-e8ba865c9b46.webp";
+
+// ✨ 核心重构：数据驱动矩阵 (告别千行面条代码)
+const navData = [
+  {
+    category: "💻 Code & Dev",
+    items: [
+      { name: "GitHub", url: "https://github.com/TQSY114514", svg: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" },
+      { name: "Luogu", url: "https://luogu.com.cn/user/1849345", svg: "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 4c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm0 15.5c-2.674 0-5.105-1.32-6.59-3.371.033-2.14 4.379-3.329 6.59-3.329s6.557 1.189 6.59 3.329c-1.485 2.051-3.916 3.371-6.59 3.371z" },
+      { name: "IOI Code", url: "https://www.ioicode.com/user/54562", svg: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" },
+      { name: "Codemao", url: "https://shequ.codemao.cn/user/1574587147", svg: "M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2m0-2C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm.5 13.5l3.5 3.5-1.5 1.5-3.5-3.5V11h-2V9h2V5.5l1.5 1.5V11h2v2h-2z" }
+    ]
+  },
+  {
+    category: "🎮 Gaming",
+    items: [
+      { name: "Steam", url: "https://steamcommunity.com/profiles/76561199885694539/", svg: "M12 .002C5.584.002.32 5.035.01 11.378l6.196 2.56c.45-.296.983-.474 1.558-.474.3 0 .584.05.852.138L12.3 9.423c-.012-.132-.023-.263-.023-.398 0-2.527 2.05-4.577 4.577-4.577E3 2.527 4.577 2.05 4.577 4.577 0 2.528-2.05 4.578-4.577 4.578-.316 0-.62-.036-.917-.098l-3.924 3.925c.088.267.138.552.138.85 0 1.48-1.2 2.68-2.68 2.68-.696 0-1.326-.267-1.803-.703L.103 15.65C1.1 20.44 5.32 24 10.42 24c6.39 0 11.61-5.02 11.97-11.365l-6.223-2.57c-.443.284-.96.452-1.516.452-.375 0-.726-.08-1.047-.218l-3.6 3.6c.006.046.017.09.017.137 0 .848-.69 1.537-1.538 1.537-.847 0-1.537-.69-1.537-1.537s.69-1.538 1.537-1.538c.365 0 .695.13.955.34l3.655-3.654c-.114-.28-.182-.587-.182-.91 0-1.48 1.2-2.681 2.68-2.681.336 0 .653.064.947.178l6.216 2.567C23.633 5.122 18.42.002 12 .002z" },
+      { name: "Epic Games", url: "https://store.epicgames.com/u/534df435083b40dbb61f5d929ed60353", svg: "M12 0L1.74 3.16v13.06L12 24l10.26-7.78V3.16L12 0zm7.31 15.54h-3.47v-2.07h3.47v2.07zm-4.71-3.64H6.84V9.83h7.76v2.07zm4.71-3.64h-3.47V6.19h3.47v2.07z" },
+      { name: "Xbox", url: "https://www.xbox.com/en-SG/play/user/TQSY9851", svg: "M11.22 23.38C5.07 22.8 .21 17.84.01 11.66c-.1-3 .92-5.91 2.87-8.17C3.12 3.2 3.42 3.2 3.59 3.4c1.19 1.45 2.5 2.5 4.19 3.29.23.11.23.41-.01.52A9.9 9.9 0 003.54 11.4c-.18.77-.24 1.56-.2 2.35.08 1.42.5 2.76 1.29 3.96.11.16.08.38-.08.5-.72.54-1.33 1.22-1.93 1.95-.12.15-.34.14-.46-.01A11.75 11.75 0 011 12C1 5.92 5.92 1 12 1s11 4.92 11 11c0 3.12-1.3 5.94-3.38 7.97-.1.1-.26.1-.36-.01-.58-.69-1.15-1.35-1.84-1.88-.16-.12-.2-.34-.09-.5.85-1.23 1.3-2.62 1.35-4.1.06-1.78-.42-3.45-1.39-4.93-.11-.17-.06-.41.13-.51 1.49-.78 2.66-1.82 3.67-3.15.15-.19.43-.2.6-.03A10.86 10.86 0 0123 12c0 5.66-4.23 10.37-9.78 11.19-.66.1-1.34.15-2 .19zm.78-12.31c-.96-1.75-2.28-3.14-3.95-4.16-.17-.11-.12-.38.08-.41 2.37-.36 4.67-.09 6.83.82.19.08.22.34.05.46-1.4 1.01-2.43 2.19-3.01 3.29z" }
+    ]
+  },
+  {
+    category: "🌸 Social & ACG",
+    items: [
+      { name: "Bangumi", url: "https://bangumi.tv/user/tqsy114514", svg: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" },
+      { name: "Pixiv", url: "https://www.pixiv.net/users/118448914", svg: "M12 0C5.373 0 0 5.373 0 12c0 5.765 4.06 10.573 9.531 11.725-.116-.957-.14-2.224.032-3.197.164-.93 1.096-4.647 1.096-4.647s-.273-.547-.273-1.355c0-1.27.734-2.219 1.652-2.219.774 0 1.15.582 1.15 1.281 0 .78-.496 1.942-.75 3.02-.215.91.46 1.652 1.356 1.652 1.63 0 2.886-1.72 2.886-4.2 0-2.197-1.578-3.734-3.834-3.734-2.613 0-4.148 1.96-4.148 3.988 0 .79.304 1.637.684 2.1.075.09.086.17.063.262-.07.29-.224.912-.255 1.037-.04.164-.135.2-.31.116-1.154-.537-1.874-2.223-1.874-3.578 0-2.913 2.117-5.589 6.104-5.589 3.203 0 5.693 2.283 5.693 5.334 0 3.183-2.007 5.746-4.793 5.746-.936 0-1.816-.486-2.117-1.06l-.578 2.2c-.21.797-.773 1.796-1.156 2.414C10.746 23.935 11.363 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" },
+      { name: "YouTube", url: "https://www.youtube.com/channel/UCQBPO6lA2LE3TVCQyIgfREQ", svg: "M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.871.507 9.388.507 9.388.507s7.517 0 9.388-.507a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" },
+      { name: "Bilibili", url: "https://space.bilibili.com/1180124107", svg: "M17.813 1.15a.75.75 0 01.466.94l-1.393 4.13h2.364c1.84 0 3.25 1.5 3.25 3.32v10.12c0 1.81-1.41 3.32-3.25 3.32H5.101c-1.84 0-3.25-1.5-3.25-3.32V9.54c0-1.81 1.41-3.32 3.25-3.32h2.364l-1.393-4.13a.75.75 0 111.41-.47l1.615 4.6h5.405l1.615-4.6a.75.75 0 01.947-.47zM19.25 7.72H4.75c-.774 0-1.25.56-1.25 1.32v10.12c0 .76.476 1.32 1.25 1.32h14.5c.774 0 1.25-.56 1.25-1.32V9.04c0-.76-.476-1.32-1.25-1.32zm-11 3.3c.69 0 1.25.56 1.25 1.25v1.65c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25v-1.65c0-.69.56-1.25 1.25-1.25zm7.5 0c.69 0 1.25.56 1.25 1.25v1.65c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25v-1.65c0-.69.56-1.25 1.25-1.25z" },
+      { name: "X (Twitter)", url: "https://x.com/TianY43737", svg: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" },
+      { name: "Instagram", url: "https://www.instagram.com/tqsy114514/", svg: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" },
+      { name: "TouchGal", url: "https://www.touchgal.ink/user/383045/comment", svg: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" },
+      { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61577768467133", svg: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
+      { name: "Nuomill", url: "https://www.nuomill.com/user/2649", svg: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" }
+    ]
+  }
+];
 ---
 
 <html lang="zh-CN">
@@ -44,7 +79,6 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
       --dot-color: rgba(0, 0, 0, 0.03);
       --noise-opacity: 0.015;
-      /* ✨ 混合了微弱 Miku 绿的高级粒子色 */
       --particle-theme: rgba(80, 130, 120, 0.25); 
     }
 
@@ -64,11 +98,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
 
     ::selection { background-color: var(--miku-green); color: #ffffff; }
 
-    * { 
-      margin: 0; padding: 0; box-sizing: border-box; 
-      -webkit-font-smoothing: antialiased; 
-      -webkit-tap-highlight-color: transparent; 
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
     ::-webkit-scrollbar { width: 0px; height: 0px; }
 
     body { 
@@ -78,25 +108,20 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       transition: background-color 0.5s var(--ease), color 0.5s var(--ease);
     }
 
-    /* 🌌 升级版底层背景系统 */
-    .bg-system {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;
-    }
+    .bg-system { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+    
     .bg-glow-1 { 
-      position: absolute; top: -10%; right: -10%; width: 60vw; height: 60vh;
-      background: radial-gradient(circle, rgba(0, 207, 181, 0.12) 0%, transparent 70%); 
+      position: absolute; top: -20%; right: -20%; width: 80vmax; height: 80vmax; 
+      background: radial-gradient(closest-side, rgba(0, 207, 181, 0.15) 0%, rgba(0, 207, 181, 0) 100%); 
     }
     .bg-glow-2 { 
-      position: absolute; bottom: -10%; left: -10%; width: 60vw; height: 60vh;
-      background: radial-gradient(circle, rgba(0, 163, 224, 0.08) 0%, transparent 70%); 
+      position: absolute; bottom: -20%; left: -20%; width: 80vmax; height: 80vmax;
+      background: radial-gradient(closest-side, rgba(0, 163, 224, 0.12) 0%, rgba(0, 163, 224, 0) 100%); 
     }
-    .particle-canvas {
-      position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
-    }
+    .particle-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    
     .bg-grid {
-      position: absolute; inset: 0;
-      background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
-      background-size: 24px 24px;
+      position: absolute; inset: 0; background-image: radial-gradient(var(--dot-color) 1px, transparent 1px); background-size: 24px 24px;
     }
     .bg-noise {
       position: absolute; inset: 0; opacity: var(--noise-opacity);
@@ -130,17 +155,13 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       filter: blur(10px); text-shadow: 0 0 30px rgba(0,0,0,0.02);
       animation: unblur 1.2s var(--ease) 0.3s both;
     }
-    .hero-sub { 
-      color: var(--text-gray); letter-spacing: 0.3em; text-transform: uppercase; 
-      font-size: 0.8rem; margin-top: 10px; opacity: 0; animation: fadeIn 1s var(--ease) 0.8s forwards;
-    }
+    .hero-sub { color: var(--text-gray); letter-spacing: 0.3em; text-transform: uppercase; font-size: 0.8rem; margin-top: 10px; opacity: 0; animation: fadeIn 1s var(--ease) 0.8s forwards; }
 
     .container { max-width: 500px; margin: 0 auto; padding: 0 20px 250px 20px; }
     
     .category-title {
       font-size: 11px; font-weight: 700; color: var(--text-gray); letter-spacing: 0.25em; text-transform: uppercase;
-      margin: 40px 0 16px 12px;
-      opacity: 0; transform: translateY(20px);
+      margin: 40px 0 16px 12px; opacity: 0; transform: translateY(20px);
       transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), opacity 1.5s ease-in-out;
     }
     .category-title.show { opacity: 0.8; transform: translateY(0); }
@@ -150,44 +171,33 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       display: flex; align-items: center; justify-content: space-between; 
       padding: 20px 24px; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border); border-radius: 24px; text-decoration: none; 
-      color: var(--text-dark); font-weight: 600; margin-bottom: 16px; 
-      opacity: 0; transform: translateY(30px);
+      color: var(--text-dark); font-weight: 600; margin-bottom: 16px; opacity: 0; transform: translateY(30px);
       transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background-color 0.5s var(--ease), filter 1.5s ease-in-out;
-      will-change: transform, opacity;
-      user-select: none; -webkit-user-select: none;
+      will-change: transform, opacity; user-select: none; -webkit-user-select: none;
     }
     
     .nav-left-zone { display: flex; align-items: center; gap: 14px; }
     .nav-item svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; transition: transform 0.4s var(--ease); }
     .nav-item span { transition: color 0.4s var(--ease); }
     .nav-item .arrow { color: var(--text-gray); opacity: 0.6; font-family: monospace; }
-    
     .nav-item.show { opacity: 1; transform: translateY(0); }
     
     @media (hover: hover) {
-      .nav-item.show:hover { 
-        transform: translateY(-4px); border-color: var(--miku-green); box-shadow: 0 10px 30px rgba(0,207,181,0.1);
-      }
+      .nav-item.show:hover { transform: translateY(-4px); border-color: var(--miku-green); box-shadow: 0 10px 30px rgba(0,207,181,0.1); }
       .nav-item.show:hover span { color: var(--miku-green); }
       .nav-item.show:hover svg { transform: scale(1.1); color: var(--miku-green); }
     }
     .nav-item.show:active { transform: scale(0.97); background: var(--glass-hover); transition: transform 0.1s, background 0.1s; }
-    
     body.is-idle .nav-item { opacity: 0.35; filter: blur(2px); }
 
-    .source-footer {
-      text-align: center; margin-top: 60px; opacity: 0; animation: fadeIn 1.5s var(--ease) 1s forwards;
-    }
+    .source-footer { text-align: center; margin-top: 60px; opacity: 0; animation: fadeIn 1.5s var(--ease) 1s forwards; }
     .source-footer a {
       display: inline-flex; align-items: center; justify-content: center; gap: 6px;
       font-size: 11px; color: var(--text-gray); text-decoration: none; letter-spacing: 0.05em;
-      transition: color 0.3s var(--ease), opacity 0.3s var(--ease);
-      user-select: none; -webkit-user-select: none; opacity: 0.6;
+      transition: color 0.3s var(--ease), opacity 0.3s var(--ease); user-select: none; -webkit-user-select: none; opacity: 0.6;
     }
     .source-footer svg { width: 13px; height: 13px; fill: currentColor; }
-    @media (hover: hover) {
-      .source-footer a:hover { color: var(--miku-green); opacity: 1; }
-    }
+    @media (hover: hover) { .source-footer a:hover { color: var(--miku-green); opacity: 1; } }
 
     .player-card { 
       position: fixed; left: 25px; bottom: 25px; width: 320px; padding: 14px; 
@@ -234,14 +244,10 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       color: var(--text-gray); border: 1px solid var(--glass-border); text-decoration: none; font-family: monospace; 
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); cursor: pointer;
       transform: translateX(var(--chip-x)); opacity: var(--chip-op);
-      transition: background 0.3s, color 0.3s, border 0.3s;
-      user-select: none; -webkit-user-select: none;
+      transition: background 0.3s, color 0.3s, border 0.3s; user-select: none; -webkit-user-select: none;
     }
     @media (hover: hover) {
-      .email-chip:hover { 
-        background: var(--miku-green); color: white; border-color: var(--miku-green); 
-        transform: translateX(calc(var(--chip-x) - 5px)); 
-      }
+      .email-chip:hover { background: var(--miku-green); color: white; border-color: var(--miku-green); transform: translateX(calc(var(--chip-x) - 5px)); }
     }
 
     @media (max-width: 600px) {
@@ -253,7 +259,6 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       .play-pause svg { width: 10px !important; height: 10px !important; }
       .player-time-labels { font-size: 8px !important; }
       .progress-bar-bg { height: 3px !important; }
-      
       .contact-panel { right: 10px !important; bottom: 10px !important; gap: 4px !important; }
       .email-chip { padding: 5px 10px !important; font-size: 8.5px !important; }
       .hero h1 { font-size: 3.2rem !important; }
@@ -266,10 +271,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
     @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
 
     @media (prefers-reduced-motion: reduce) {
-      *, ::before, ::after {
-        animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important; scroll-behavior: auto !important;
-      }
+      *, ::before, ::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
       .nav-item, .category-title { opacity: 1; transform: translateY(0); filter: none !important; }
       .email-chip { opacity: 1; transform: translateX(0) !important; }
       body.is-idle .bg-glow-1, body.is-idle .bg-glow-2 { animation: none !important; } 
@@ -293,140 +295,21 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
 
   <main class="container">
     <nav class="nav-list" id="navList" aria-label="个人主页导航矩阵">
-      
-      <div class="category-title">💻 Code & Dev</div>
-      
-      <a href="https://github.com/TQSY114514" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          <span>GitHub</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      
-      <a href="https://luogu.com.cn/user/1849345" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 4c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm0 15.5c-2.674 0-5.105-1.32-6.59-3.371.033-2.14 4.379-3.329 6.59-3.329s6.557 1.189 6.59 3.329c-1.485 2.051-3.916 3.371-6.59 3.371z"/></svg>
-          <span>Luogu</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://www.ioicode.com/user/54562" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-          <span>IOI Code</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://shequ.codemao.cn/user/1574587147" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2m0-2C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm.5 13.5l3.5 3.5-1.5 1.5-3.5-3.5V11h-2V9h2V5.5l1.5 1.5V11h2v2h-2z"/></svg>
-          <span>Codemao</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <div class="category-title">🎮 Gaming</div>
-      
-      <a href="https://steamcommunity.com/profiles/76561199885694539/" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 .002C5.584.002.32 5.035.01 11.378l6.196 2.56c.45-.296.983-.474 1.558-.474.3 0 .584.05.852.138L12.3 9.423c-.012-.132-.023-.263-.023-.398 0-2.527 2.05-4.577 4.577-4.577E3 2.527 4.577 2.05 4.577 4.577 0 2.528-2.05 4.578-4.577 4.578-.316 0-.62-.036-.917-.098l-3.924 3.925c.088.267.138.552.138.85 0 1.48-1.2 2.68-2.68 2.68-.696 0-1.326-.267-1.803-.703L.103 15.65C1.1 20.44 5.32 24 10.42 24c6.39 0 11.61-5.02 11.97-11.365l-6.223-2.57c-.443.284-.96.452-1.516.452-.375 0-.726-.08-1.047-.218l-3.6 3.6c.006.046.017.09.017.137 0 .848-.69 1.537-1.538 1.537-.847 0-1.537-.69-1.537-1.537s.69-1.538 1.537-1.538c.365 0 .695.13.955.34l3.655-3.654c-.114-.28-.182-.587-.182-.91 0-1.48 1.2-2.681 2.68-2.681.336 0 .653.064.947.178l6.216 2.567C23.633 5.122 18.42.002 12 .002z"/></svg>
-          <span>Steam</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://store.epicgames.com/u/534df435083b40dbb61f5d929ed60353" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 0L1.74 3.16v13.06L12 24l10.26-7.78V3.16L12 0zm7.31 15.54h-3.47v-2.07h3.47v2.07zm-4.71-3.64H6.84V9.83h7.76v2.07zm4.71-3.64h-3.47V6.19h3.47v2.07z"/></svg>
-          <span>Epic Games</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://www.xbox.com/en-SG/play/user/TQSY9851" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M11.22 23.38C5.07 22.8 .21 17.84.01 11.66c-.1-3 .92-5.91 2.87-8.17C3.12 3.2 3.42 3.2 3.59 3.4c1.19 1.45 2.5 2.5 4.19 3.29.23.11.23.41-.01.52A9.9 9.9 0 003.54 11.4c-.18.77-.24 1.56-.2 2.35.08 1.42.5 2.76 1.29 3.96.11.16.08.38-.08.5-.72.54-1.33 1.22-1.93 1.95-.12.15-.34.14-.46-.01A11.75 11.75 0 011 12C1 5.92 5.92 1 12 1s11 4.92 11 11c0 3.12-1.3 5.94-3.38 7.97-.1.1-.26.1-.36-.01-.58-.69-1.15-1.35-1.84-1.88-.16-.12-.2-.34-.09-.5.85-1.23 1.3-2.62 1.35-4.1.06-1.78-.42-3.45-1.39-4.93-.11-.17-.06-.41.13-.51 1.49-.78 2.66-1.82 3.67-3.15.15-.19.43-.2.6-.03A10.86 10.86 0 0123 12c0 5.66-4.23 10.37-9.78 11.19-.66.1-1.34.15-2 .19zm.78-12.31c-.96-1.75-2.28-3.14-3.95-4.16-.17-.11-.12-.38.08-.41 2.37-.36 4.67-.09 6.83.82.19.08.22.34.05.46-1.4 1.01-2.43 2.19-3.01 3.29z"/></svg>
-          <span>Xbox</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      
-      <div class="category-title">🌸 Social & ACG</div>
-      
-      <a href="https://bangumi.tv/user/tqsy114514" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          <span>Bangumi</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://www.pixiv.net/users/118448914" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.765 4.06 10.573 9.531 11.725-.116-.957-.14-2.224.032-3.197.164-.93 1.096-4.647 1.096-4.647s-.273-.547-.273-1.355c0-1.27.734-2.219 1.652-2.219.774 0 1.15.582 1.15 1.281 0 .78-.496 1.942-.75 3.02-.215.91.46 1.652 1.356 1.652 1.63 0 2.886-1.72 2.886-4.2 0-2.197-1.578-3.734-3.834-3.734-2.613 0-4.148 1.96-4.148 3.988 0 .79.304 1.637.684 2.1.075.09.086.17.063.262-.07.29-.224.912-.255 1.037-.04.164-.135.2-.31.116-1.154-.537-1.874-2.223-1.874-3.578 0-2.913 2.117-5.589 6.104-5.589 3.203 0 5.693 2.283 5.693 5.334 0 3.183-2.007 5.746-4.793 5.746-.936 0-1.816-.486-2.117-1.06l-.578 2.2c-.21.797-.773 1.796-1.156 2.414C10.746 23.935 11.363 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-          <span>Pixiv</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://www.youtube.com/channel/UCQBPO6lA2LE3TVCQyIgfREQ" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.871.507 9.388.507 9.388.507s7.517 0 9.388-.507a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          <span>YouTube</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://space.bilibili.com/1180124107" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M17.813 1.15a.75.75 0 01.466.94l-1.393 4.13h2.364c1.84 0 3.25 1.5 3.25 3.32v10.12c0 1.81-1.41 3.32-3.25 3.32H5.101c-1.84 0-3.25-1.5-3.25-3.32V9.54c0-1.81 1.41-3.32 3.25-3.32h2.364l-1.393-4.13a.75.75 0 111.41-.47l1.615 4.6h5.405l1.615-4.6a.75.75 0 01.947-.47zM19.25 7.72H4.75c-.774 0-1.25.56-1.25 1.32v10.12c0 .76.476 1.32 1.25 1.32h14.5c.774 0 1.25-.56 1.25-1.32V9.04c0-.76-.476-1.32-1.25-1.32zm-11 3.3c.69 0 1.25.56 1.25 1.25v1.65c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25v-1.65c0-.69.56-1.25 1.25-1.25zm7.5 0c.69 0 1.25.56 1.25 1.25v1.65c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25v-1.65c0-.69.56-1.25 1.25-1.25z"/></svg>
-          <span>Bilibili</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://x.com/TianY43737" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          <span>X (Twitter)</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://www.instagram.com/tqsy114514/" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          <span>Instagram</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://www.touchgal.ink/user/383045/comment" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-          <span>TouchGal</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://www.facebook.com/profile.php?id=61577768467133" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          <span>Facebook</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://www.nuomill.com/user/2649" target="_blank" rel="noopener noreferrer" class="nav-item">
-        <div class="nav-left-zone">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-          <span>Nuomill</span>
-        </div>
-        <span class="arrow">→</span>
-      </a>
+      {/* ✨ 神级进化：Astro 数据映射渲染，一劳永逸！ */}
+      {navData.map(group => (
+        <>
+          <div class="category-title">{group.category}</div>
+          {group.items.map(item => (
+            <a href={item.url} target="_blank" rel="noopener noreferrer" class="nav-item">
+              <div class="nav-left-zone">
+                <svg viewBox="0 0 24 24"><path d={item.svg}></path></svg>
+                <span>{item.name}</span>
+              </div>
+              <span class="arrow">→</span>
+            </a>
+          ))}
+        </>
+      ))}
     </nav>
 
     <footer class="source-footer">
@@ -449,20 +332,11 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
         <svg id="icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
       </button>
     </div>
-    
     <div class="player-progress-zone">
-      <div class="progress-bar-bg" id="progressContainer">
-        <div class="progress-bar-fill" id="progressFill"></div>
-      </div>
-      <div class="player-time-labels">
-        <span id="timeCurrent">00:00</span>
-        <span id="timeTotal">00:00</span>
-      </div>
+      <div class="progress-bar-bg" id="progressContainer"><div class="progress-bar-fill" id="progressFill"></div></div>
+      <div class="player-time-labels"><span id="timeCurrent">00:00</span><span id="timeTotal">00:00</span></div>
     </div>
-
-    <audio id="mainAudio" loop preload="metadata">
-      <source src="https://videotourl.com/audio/1775904309738-ed28bd2b-7261-4bb9-8cab-1ed6c1b5b0c9.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="mainAudio" loop preload="metadata"><source src="https://videotourl.com/audio/1775904309738-ed28bd2b-7261-4bb9-8cab-1ed6c1b5b0c9.mp3" type="audio/mpeg"></audio>
   </aside>
 
   <address class="contact-panel" id="contactPanel">
@@ -473,22 +347,17 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
   </address>
 
   <script is:inline>
-    // --- 1. 基础系统 (静止态、安全拦截) ---
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let idleTimer;
     const resetIdleTimer = () => {
       document.body.classList.remove('is-idle');
       clearTimeout(idleTimer);
-      if (!prefersReducedMotion) {
-        idleTimer = setTimeout(() => { document.body.classList.add('is-idle'); }, 5000); 
-      }
+      if (!prefersReducedMotion) idleTimer = setTimeout(() => { document.body.classList.add('is-idle'); }, 5000); 
     };
-    ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'].forEach(evt => 
-      window.addEventListener(evt, resetIdleTimer, { passive: true })
-    );
+    ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'].forEach(evt => window.addEventListener(evt, resetIdleTimer, { passive: true }));
     resetIdleTimer();
 
-    // --- 2. 纯净镜面反射 Canvas 粒子系统 ---
+    // ✨ 核心注入：带有「磁场扰动与阻尼回弹」的 60FPS 物理引擎
     const particleCanvas = document.getElementById('particleCanvas');
     if (particleCanvas && !prefersReducedMotion) {
       const ctx = particleCanvas.getContext('2d');
@@ -496,19 +365,24 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       const RADIUS = 2.4;
       const DIAMETER = RADIUS * 2;
       const CONNECT_DISTANCE = 145;
-      const SPEED = 34;
+      const BASE_SPEED = 34; // 匀速巡航速度
+      
+      const MOUSE_RADIUS = 120; // 磁场半径
+      const MOUSE_FORCE = 400;  // 斥力推演系数
 
       let width = 0; let height = 0; let dpr = 1;
       let particles = []; let rafId = null; let lastTime = performance.now();
+      
+      // 追踪鼠标位置
+      let mouse = { x: -1000, y: -1000 };
+      window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+      window.addEventListener('mouseout', () => { mouse.x = -1000; mouse.y = -1000; });
 
-      const getParticleColor = () => 
-        getComputedStyle(document.documentElement).getPropertyValue('--particle-theme').trim() || 'rgba(120, 120, 128, 0.3)';
+      const getParticleColor = () => getComputedStyle(document.documentElement).getPropertyValue('--particle-theme').trim() || 'rgba(120, 120, 128, 0.3)';
 
       const resizeParticles = () => {
         dpr = Math.min(window.devicePixelRatio || 1, 2);
-        width = window.innerWidth;
-        height = window.innerHeight;
-
+        width = window.innerWidth; height = window.innerHeight;
         particleCanvas.width = Math.floor(width * dpr);
         particleCanvas.height = Math.floor(height * dpr);
         particleCanvas.style.width = `${width}px`;
@@ -521,8 +395,8 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
             return {
               x: RADIUS + Math.random() * (width - DIAMETER),
               y: RADIUS + Math.random() * (height - DIAMETER),
-              vx: Math.cos(angle) * SPEED,
-              vy: Math.sin(angle) * SPEED,
+              vx: Math.cos(angle) * BASE_SPEED,
+              vy: Math.sin(angle) * BASE_SPEED,
             };
           });
         }
@@ -531,55 +405,57 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       const stepParticles = (now) => {
         const dt = Math.min((now - lastTime) / 1000, 0.033);
         lastTime = now;
-
         ctx.clearRect(0, 0, width, height);
         const color = getParticleColor();
 
-        // 物理引擎：强制镜面反射
         for (const particle of particles) {
+          // 🧲 1. 鼠标磁场斥力判定
+          const dx = particle.x - mouse.x;
+          const dy = particle.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < MOUSE_RADIUS && dist > 0) {
+            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS; // 越近斥力越强 (0~1)
+            particle.vx += (dx / dist) * force * MOUSE_FORCE * dt;
+            particle.vy += (dy / dist) * force * MOUSE_FORCE * dt;
+          }
+
+          // 🏃 2. 基础位移计算
           particle.x += particle.vx * dt;
           particle.y += particle.vy * dt;
 
-          if (particle.x <= RADIUS) {
-            particle.x = RADIUS; particle.vx *= -1;
-          } else if (particle.x >= width - RADIUS) {
-            particle.x = width - RADIUS; particle.vx *= -1;
-          }
+          // 🧱 3. 完美的纯光学镜面物理反射
+          if (particle.x <= RADIUS) { particle.x = RADIUS; particle.vx *= -1; } 
+          else if (particle.x >= width - RADIUS) { particle.x = width - RADIUS; particle.vx *= -1; }
+          if (particle.y <= RADIUS) { particle.y = RADIUS; particle.vy *= -1; } 
+          else if (particle.y >= height - RADIUS) { particle.y = height - RADIUS; particle.vy *= -1; }
 
-          if (particle.y <= RADIUS) {
-            particle.y = RADIUS; particle.vy *= -1;
-          } else if (particle.y >= height - RADIUS) {
-            particle.y = height - RADIUS; particle.vy *= -1;
+          // 🌬️ 4. 阻尼系统：被推开后优雅地“弹回匀速”
+          const currentSpeed = Math.hypot(particle.vx, particle.vy);
+          if (currentSpeed > 0) {
+            // 用 5% 的阻尼系数，让速度平滑过渡回 BASE_SPEED
+            const newSpeed = currentSpeed + (BASE_SPEED - currentSpeed) * 0.05;
+            particle.vx = (particle.vx / currentSpeed) * newSpeed;
+            particle.vy = (particle.vy / currentSpeed) * newSpeed;
           }
         }
 
-        // 连线渲染
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const a = particles[i]; const b = particles[j];
-            const dx = a.x - b.x; const dy = a.y - b.y;
-            const distance = Math.hypot(dx, dy);
-
-            if (distance < CONNECT_DISTANCE) {
-              const strength = 1 - distance / CONNECT_DISTANCE;
-              ctx.globalAlpha = strength * 0.75;
-              ctx.strokeStyle = color;
+            const dist = Math.hypot(a.x - b.x, a.y - b.y);
+            if (dist < CONNECT_DISTANCE) {
+              const strength = 1 - dist / CONNECT_DISTANCE;
+              ctx.globalAlpha = strength * 0.75; ctx.strokeStyle = color;
               ctx.lineWidth = Math.min(DIAMETER, 1.4 * strength);
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.stroke();
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
             }
           }
         }
 
-        // 粒子渲染
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = color;
+        ctx.globalAlpha = 1; ctx.fillStyle = color;
         for (const particle of particles) {
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, RADIUS, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.beginPath(); ctx.arc(particle.x, particle.y, RADIUS, 0, Math.PI * 2); ctx.fill();
         }
 
         rafId = requestAnimationFrame(stepParticles);
@@ -587,46 +463,31 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
 
       resizeParticles();
       window.addEventListener('resize', resizeParticles, { passive: true });
-
-      // 电量保护：切走屏幕立刻停止物理计算
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) { cancelAnimationFrame(rafId); } 
         else { lastTime = performance.now(); rafId = requestAnimationFrame(stepParticles); }
       });
-
       rafId = requestAnimationFrame(stepParticles);
     }
 
-    // --- 3. 页面卡片滚动探测 ---
     const items = document.querySelectorAll('.nav-item, .category-title');
     const itemsArray = Array.from(items); 
     let staggerDelay = 0; let resetTimer = null;
-
     const observer = new IntersectionObserver((entries) => {
-      const visibleEntries = entries.filter(entry => 
-        entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight
-      );
+      const visibleEntries = entries.filter(entry => entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight);
       if (visibleEntries.length === 0) return;
       visibleEntries.sort((a, b) => itemsArray.indexOf(a.target) - itemsArray.indexOf(b.target));
-
       visibleEntries.forEach((entry) => {
         if (!entry.target.classList.contains('show')) {
           if (prefersReducedMotion) entry.target.classList.add('show');
-          else {
-            setTimeout(() => { entry.target.classList.add('show'); }, staggerDelay);
-            staggerDelay += 80; 
-          }
+          else { setTimeout(() => { entry.target.classList.add('show'); }, staggerDelay); staggerDelay += 80; }
           observer.unobserve(entry.target);
         }
       });
-      if (!prefersReducedMotion) {
-        clearTimeout(resetTimer);
-        resetTimer = setTimeout(() => { staggerDelay = 0; }, 300);
-      }
+      if (!prefersReducedMotion) { clearTimeout(resetTimer); resetTimer = setTimeout(() => { staggerDelay = 0; }, 300); }
     }, { threshold: 0, rootMargin: "0px 0px -50px 0px" });
     items.forEach(item => observer.observe(item));
 
-    // --- 4. 音乐播放器高精丝滑进度条 ---
     const audio = document.getElementById('mainAudio');
     const playBtn = document.getElementById('playBtn');
     const playerCard = document.getElementById('playerCard');
@@ -638,15 +499,12 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
 
     const formatTime = (secs) => {
       if (isNaN(secs)) return "00:00";
-      const m = Math.floor(secs / 60).toString().padStart(2, '0');
-      const s = Math.floor(secs % 60).toString().padStart(2, '0');
-      return `${m}:${s}`;
+      return `${Math.floor(secs / 60).toString().padStart(2, '0')}:${Math.floor(secs % 60).toString().padStart(2, '0')}`;
     };
 
     const updateAudioProgress = () => {
       if (!audio.paused && audio.duration) {
-        const pct = (audio.currentTime / audio.duration) * 100;
-        progressFill.style.width = `${pct}%`;
+        progressFill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
         timeCurrent.textContent = formatTime(audio.currentTime);
       }
       audioRafId = requestAnimationFrame(updateAudioProgress);
@@ -655,29 +513,23 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
     playBtn.onclick = (e) => {
       e.stopPropagation();
       if (audio.paused) {
-        audio.play().catch(() => console.warn('Audio play intercepted by browser.'));
+        audio.play().catch(() => console.warn('Audio play intercepted.'));
         playerCard.classList.add('is-playing');
         audioRafId = requestAnimationFrame(updateAudioProgress);
       } else {
-        audio.pause();
-        playerCard.classList.remove('is-playing');
-        cancelAnimationFrame(audioRafId);
+        audio.pause(); playerCard.classList.remove('is-playing'); cancelAnimationFrame(audioRafId);
       }
     };
 
     audio.addEventListener('loadedmetadata', () => { timeTotal.textContent = formatTime(audio.duration); });
-
     progressContainer.onclick = (e) => {
       if (!audio.duration) return;
-      const rect = progressContainer.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      audio.currentTime = (clickX / rect.width) * audio.duration;
-      // 立刻强制更新一次视觉，防止拖拽后跳闪
+      const clickX = e.clientX - progressContainer.getBoundingClientRect().left;
+      audio.currentTime = (clickX / progressContainer.getBoundingClientRect().width) * audio.duration;
       progressFill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
       timeCurrent.textContent = formatTime(audio.currentTime);
     };
 
-    // --- 5. 底部邮件混淆防爬系统 ---
     const emailChips = document.querySelectorAll('.email-chip');
     emailChips.forEach(chip => {
       const realEmail = `${chip.getAttribute('data-user')}@${chip.getAttribute('data-host')}`;
@@ -698,14 +550,12 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
       emailChips.forEach((chip, index) => {
         if (prefersReducedMotion) { chip.style.setProperty('--chip-x', '0px'); chip.style.setProperty('--chip-op', '1'); return; }
         const easeOut = 1 - Math.pow(1 - Math.max(0, Math.min(1, Math.max(0, progress - index * 0.15) / 0.55)), 2);
-        chip.style.setProperty('--chip-x', `${40 * (1 - easeOut)}px`);
-        chip.style.setProperty('--chip-op', easeOut);
+        chip.style.setProperty('--chip-x', `${40 * (1 - easeOut)}px`); chip.style.setProperty('--chip-op', easeOut);
       });
     };
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
     window.addEventListener('resize', updateScrollProgress, { passive: true });
     updateScrollProgress(); 
-
   </script>
 </body>
 </html>
