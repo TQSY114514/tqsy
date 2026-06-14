@@ -1,5 +1,5 @@
 ---
-// TQSY's Space - V3.5 终极形态变幻版 (灵动岛展开为大卡片 + 完美网格)
+// TQSY's Space - V3.6 高清毛玻璃变幻版 (解决模糊 + 顶部毛玻璃胶囊展开)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
@@ -104,7 +104,7 @@ const jsonLd = {
       --glass-hover: rgba(0, 207, 181, 0.08);
       
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
-      --spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* 苹果级弹簧阻尼 */
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* 核心苹果级弹簧阻尼曲线 */
       --dot-color: rgba(0, 0, 0, 0.03);
       --noise-opacity: 0.015;
       --particle-theme: rgba(80, 130, 120, 0.25); 
@@ -175,26 +175,34 @@ const jsonLd = {
       body.is-idle .nav-list:hover .category-title { opacity: 0.8; }
     }
 
-    /* ✨ V3.5 纯正灵动岛 + 展开交互 */
     .hero { 
       height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
       user-select: none; -webkit-user-select: none; position: relative;
     }
 
-    /* 🍏 灵动岛绝对定位在屏幕顶部，浮在大标题上方 */
+    /* ✨ V3.6 全局毛玻璃悬浮岛！上移至 25px */
     .island-wrapper {
       position: absolute;
-      top: max(8vh, 40px); /* 悬浮在最顶上 */
+      top: 25px; /* 极致悬浮感，位置往上抬 */
       left: 50%;
       transform: translateX(-50%);
-      width: 140px; 
-      height: 44px;
-      border-radius: 44px;
+      width: 150px; 
+      height: 48px;
+      border-radius: 48px;
       z-index: 100;
       cursor: pointer;
-      /* 核心物理弹簧缓动 */
-      transition: width 0.5s var(--spring), height 0.5s var(--spring), border-radius 0.5s var(--spring);
-      animation: islandDrop 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+      
+      /* 基础形态直接就是毛玻璃 */
+      background: var(--vp-glass);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--vp-glass-border);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+
+      transition: width 0.5s var(--spring), height 0.5s var(--spring), border-radius 0.5s var(--spring), background 0.3s;
+      animation: islandDrop 1s var(--spring) 0.1s both;
+    }
+    @media (prefers-color-scheme: dark) {
+      .island-wrapper { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
     }
 
     @keyframes islandDrop { 
@@ -202,43 +210,21 @@ const jsonLd = {
       to { opacity: 1; transform: translate(-50%, 0) scale(1); } 
     }
 
-    /* 灵动岛的黑底与毛玻璃底双重渐变 */
-    .island-bg-black {
-      position: absolute; inset: 0; border-radius: inherit; background-color: #000;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.12);
-      transition: opacity 0.3s ease;
-    }
-    @media (prefers-color-scheme: dark) {
-      .island-bg-black { box-shadow: 0 16px 40px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.08); }
-    }
-    
-    .island-bg-glass {
-      position: absolute; inset: 0; border-radius: inherit;
-      background: var(--vp-glass);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--vp-glass-border);
-      box-shadow: var(--vp-glass-shadow);
-      opacity: 0; transition: opacity 0.4s ease;
-    }
-
-    /* 鼠标悬停 (或手机点击) 展开大卡片 */
+    /* 悬停展开为大卡片 */
     @media (hover: hover) {
-      .island-wrapper:hover { width: 320px; height: 260px; border-radius: 32px; }
-      .island-wrapper:hover .island-bg-black { opacity: 0; }
-      .island-wrapper:hover .island-bg-glass { opacity: 1; }
-      .island-wrapper:hover .island-compact { opacity: 0; transform: scale(0.8); pointer-events: none; transition: opacity 0.2s ease, transform 0.3s ease; }
-      .island-wrapper:hover .island-expanded { opacity: 1; transform: scale(1); pointer-events: auto; transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.1s; }
+      .island-wrapper:hover { width: 320px; height: 260px; border-radius: 32px; background: var(--glass-hover); }
+      .island-wrapper:hover .island-compact { opacity: 0; transform: scale(0.8); pointer-events: none; }
+      .island-wrapper:hover .island-expanded { opacity: 1; transform: scale(1); pointer-events: auto; transition-delay: 0.1s; }
     }
-    .island-wrapper.is-expanded { width: 300px; height: 260px; border-radius: 32px; }
-    .island-wrapper.is-expanded .island-bg-black { opacity: 0; }
-    .island-wrapper.is-expanded .island-bg-glass { opacity: 1; }
+    .island-wrapper.is-expanded { width: 300px; height: 260px; border-radius: 32px; background: var(--glass-hover); }
     .island-wrapper.is-expanded .island-compact { opacity: 0; transform: scale(0.8); pointer-events: none; }
-    .island-wrapper.is-expanded .island-expanded { opacity: 1; transform: scale(1); pointer-events: auto; }
+    .island-wrapper.is-expanded .island-expanded { opacity: 1; transform: scale(1); pointer-events: auto; transition-delay: 0.1s; }
 
-    /* 灵动岛·小形态内容 */
+    /* 小形态内容：因为背景是透明毛玻璃了，文字用深色 */
     .island-compact {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px;
-      color: #fff; transition: opacity 0.4s ease, transform 0.4s ease;
+      color: var(--text-dark); /* 不再是纯白 */
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
     .island-avatar-small { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
     .island-text-small { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; }
@@ -248,11 +234,11 @@ const jsonLd = {
     }
     @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(0, 207, 181, 0.5); } 70% { box-shadow: 0 0 0 6px rgba(0, 207, 181, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 207, 181, 0); } }
 
-    /* 灵动岛·毛玻璃大形态内容 */
+    /* 大形态内容 */
     .island-expanded {
       position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px;
       opacity: 0; transform: scale(0.9); pointer-events: none; color: var(--text-dark);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
     .island-avatar-large { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--vp-glass-border); box-shadow: 0 8px 24px rgba(0,0,0,0.1); margin-bottom: 12px; }
     .island-name-large { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
@@ -267,19 +253,23 @@ const jsonLd = {
     .badge-icon svg { width: 20px; height: 20px; fill: currentColor; }
     @media (hover: hover) { .badge-icon:hover { background: var(--miku-green); color: #fff; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,207,181,0.2); } }
 
-    /* 恢复居中大标题 */
+    /* ✨ 修复大标题模糊 Bug：不再给 h1 默认设置 blur，全在动画里完成并销毁 */
     .hero h1 { 
       font-size: clamp(3.2rem, 10vw, 6.5rem); font-weight: 800; 
       background: linear-gradient(var(--text-dark), var(--text-gray)); 
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-      filter: blur(10px); text-shadow: 0 0 30px rgba(0,0,0,0.02);
-      animation: unblur 1.2s var(--ease) 0.3s both;
+      /*移除了原本的 filter: blur(10px) 避免 Safari 渲染残留 */
+      animation: titleReveal 1.2s var(--ease) 0.2s both;
       line-height: 1.1; margin-bottom: 12px;
+    }
+    @keyframes titleReveal {
+      0% { opacity: 0; filter: blur(12px); transform: translateY(15px); }
+      100% { opacity: 1; filter: blur(0); transform: translateY(0); }
     }
     
     .typewriter-box {
       display: flex; align-items: center; justify-content: center; height: 20px;
-      opacity: 0; animation: fadeIn 1s var(--ease) 0.8s forwards;
+      opacity: 0; animation: titleReveal 1s var(--ease) 0.6s both;
     }
     .hero-sub { color: var(--text-gray); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; font-family: monospace; font-weight: 600; }
     .cursor { display: inline-block; width: 2px; height: 1.1em; background-color: var(--miku-green); margin-left: 6px; animation: blink 1s step-end infinite; }
@@ -385,7 +375,7 @@ const jsonLd = {
       .nav-grid { grid-template-columns: 1fr; }
       .nav-grid > .nav-item:last-child:nth-child(odd) { grid-column: span 1; }
       
-      .island-wrapper { top: 6vh; }
+      .island-wrapper { top: 20px; }
       .hero h1 { font-size: 3.2rem !important; margin-bottom: 10px; }
       .hero-sub { font-size: 0.75rem; }
       
@@ -407,6 +397,7 @@ const jsonLd = {
       .nav-item, .category-title { opacity: 1; transform: translateY(0); filter: none !important; }
       .email-chip { opacity: 1; transform: translateX(0) !important; }
       body.is-idle .bg-glow-1, body.is-idle .bg-glow-2 { animation: none !important; } 
+      .hero h1 { filter: none !important; opacity: 1 !important; transform: none !important; }
     }
   </style>
 </head>
@@ -421,13 +412,10 @@ const jsonLd = {
   </div>
 
   <section class="hero">
-    <!-- ✨ 神级缝合：悬浮灵动岛 (动态展开) -->
+    <!-- ✨ 纯净毛玻璃变幻岛 -->
     <div class="island-wrapper" id="dynamicIsland">
-      <!-- 背景层剥离，为了丝滑交叉淡入淡出 -->
-      <div class="island-bg-black"></div>
-      <div class="island-bg-glass"></div>
-
-      <!-- 1. 默认折叠形态 (深邃胶囊) -->
+      
+      <!-- 1. 默认折叠形态 (毛玻璃胶囊) -->
       <div class="island-compact">
         <img src={globalIcon} alt="Avatar" class="island-avatar-small" />
         <div class="island-text-small">TQSY</div>
@@ -515,7 +503,6 @@ const jsonLd = {
   </address>
 
   <script is:inline>
-    // ✨ 手机端点击灵动岛展开逻辑
     const dynamicIsland = document.getElementById('dynamicIsland');
     if (dynamicIsland) {
       dynamicIsland.addEventListener('click', (e) => {
