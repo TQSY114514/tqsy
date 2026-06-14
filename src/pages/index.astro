@@ -1,5 +1,5 @@
 ---
-// TQSY's Space - V3.4 灵动岛版 (Dynamic Island + 无界大标题 + 完美网格)
+// TQSY's Space - V3.5 终极形态变幻版 (灵动岛展开为大卡片 + 完美网格)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
@@ -104,6 +104,7 @@ const jsonLd = {
       --glass-hover: rgba(0, 207, 181, 0.08);
       
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* 苹果级弹簧阻尼 */
       --dot-color: rgba(0, 0, 0, 0.03);
       --noise-opacity: 0.015;
       --particle-theme: rgba(80, 130, 120, 0.25); 
@@ -174,48 +175,99 @@ const jsonLd = {
       body.is-idle .nav-list:hover .category-title { opacity: 0.8; }
     }
 
-    /* ✨ V3.4 纯正灵动岛 Hero 区 */
+    /* ✨ V3.5 纯正灵动岛 + 展开交互 */
     .hero { 
       height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
-      user-select: none; -webkit-user-select: none;
+      user-select: none; -webkit-user-select: none; position: relative;
     }
-    
-    /* 🍏 灵动岛核心样式 */
-    .dynamic-island {
-      display: flex; align-items: center; gap: 10px;
-      padding: 6px 16px 6px 6px; border-radius: 999px;
-      margin-bottom: 30px;
-      background-color: #000;
-      color: #fff;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.12);
-      opacity: 0; transform: translateY(-30px) scale(0.9);
+
+    /* 🍏 灵动岛绝对定位在屏幕顶部，浮在大标题上方 */
+    .island-wrapper {
+      position: absolute;
+      top: max(8vh, 40px); /* 悬浮在最顶上 */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px; 
+      height: 44px;
+      border-radius: 44px;
+      z-index: 100;
+      cursor: pointer;
+      /* 核心物理弹簧缓动 */
+      transition: width 0.5s var(--spring), height 0.5s var(--spring), border-radius 0.5s var(--spring);
       animation: islandDrop 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-      z-index: 10;
+    }
+
+    @keyframes islandDrop { 
+      from { opacity: 0; transform: translate(-50%, -30px) scale(0.9); } 
+      to { opacity: 1; transform: translate(-50%, 0) scale(1); } 
+    }
+
+    /* 灵动岛的黑底与毛玻璃底双重渐变 */
+    .island-bg-black {
+      position: absolute; inset: 0; border-radius: inherit; background-color: #000;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.12);
+      transition: opacity 0.3s ease;
     }
     @media (prefers-color-scheme: dark) {
-      .dynamic-island { box-shadow: 0 16px 40px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.08); }
+      .island-bg-black { box-shadow: 0 16px 40px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.08); }
     }
-    @keyframes islandDrop { to { opacity: 1; transform: translateY(0) scale(1); } }
+    
+    .island-bg-glass {
+      position: absolute; inset: 0; border-radius: inherit;
+      background: var(--vp-glass);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--vp-glass-border);
+      box-shadow: var(--vp-glass-shadow);
+      opacity: 0; transition: opacity 0.4s ease;
+    }
 
-    .island-avatar {
-      width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
+    /* 鼠标悬停 (或手机点击) 展开大卡片 */
+    @media (hover: hover) {
+      .island-wrapper:hover { width: 320px; height: 260px; border-radius: 32px; }
+      .island-wrapper:hover .island-bg-black { opacity: 0; }
+      .island-wrapper:hover .island-bg-glass { opacity: 1; }
+      .island-wrapper:hover .island-compact { opacity: 0; transform: scale(0.8); pointer-events: none; transition: opacity 0.2s ease, transform 0.3s ease; }
+      .island-wrapper:hover .island-expanded { opacity: 1; transform: scale(1); pointer-events: auto; transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.1s; }
     }
-    
-    .island-info { display: flex; align-items: center; gap: 8px; }
-    .island-text { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; }
-    
-    /* ✨ 灵动岛摄像头/状态呼吸灯 */
+    .island-wrapper.is-expanded { width: 300px; height: 260px; border-radius: 32px; }
+    .island-wrapper.is-expanded .island-bg-black { opacity: 0; }
+    .island-wrapper.is-expanded .island-bg-glass { opacity: 1; }
+    .island-wrapper.is-expanded .island-compact { opacity: 0; transform: scale(0.8); pointer-events: none; }
+    .island-wrapper.is-expanded .island-expanded { opacity: 1; transform: scale(1); pointer-events: auto; }
+
+    /* 灵动岛·小形态内容 */
+    .island-compact {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px;
+      color: #fff; transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .island-avatar-small { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+    .island-text-small { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; }
     .status-dot {
       width: 6px; height: 6px; background-color: var(--miku-green); border-radius: 50%;
-      box-shadow: 0 0 8px var(--miku-green);
-      animation: pulseDot 2s infinite;
+      box-shadow: 0 0 8px var(--miku-green); animation: pulseDot 2s infinite; margin-left: 2px;
     }
-    @keyframes pulseDot {
-      0% { box-shadow: 0 0 0 0 rgba(0, 207, 181, 0.5); }
-      70% { box-shadow: 0 0 0 6px rgba(0, 207, 181, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(0, 207, 181, 0); }
-    }
+    @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(0, 207, 181, 0.5); } 70% { box-shadow: 0 0 0 6px rgba(0, 207, 181, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 207, 181, 0); } }
 
+    /* 灵动岛·毛玻璃大形态内容 */
+    .island-expanded {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px;
+      opacity: 0; transform: scale(0.9); pointer-events: none; color: var(--text-dark);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .island-avatar-large { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--vp-glass-border); box-shadow: 0 8px 24px rgba(0,0,0,0.1); margin-bottom: 12px; }
+    .island-name-large { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .island-role-large { font-size: 0.75rem; color: var(--text-gray); letter-spacing: 0.1em; text-transform: uppercase; font-family: monospace; font-weight: 600; margin-bottom: 24px; }
+    
+    .island-badges { display: flex; gap: 16px; border-top: 1px solid var(--vp-glass-border); padding-top: 20px; width: 100%; justify-content: center; }
+    .badge-icon { 
+      width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+      color: var(--text-dark); background: rgba(0,0,0,0.03); transition: 0.3s var(--ease);
+    }
+    @media (prefers-color-scheme: dark) { .badge-icon { background: rgba(255,255,255,0.05); } }
+    .badge-icon svg { width: 20px; height: 20px; fill: currentColor; }
+    @media (hover: hover) { .badge-icon:hover { background: var(--miku-green); color: #fff; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,207,181,0.2); } }
+
+    /* 恢复居中大标题 */
     .hero h1 { 
       font-size: clamp(3.2rem, 10vw, 6.5rem); font-weight: 800; 
       background: linear-gradient(var(--text-dark), var(--text-gray)); 
@@ -242,22 +294,12 @@ const jsonLd = {
     .category-title.show { opacity: 0.8; transform: translateY(0); }
     body.is-idle .category-title { opacity: 0.3; }
 
-    .nav-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 8px;
-    }
-
-    .nav-grid > .nav-item:last-child:nth-child(odd) {
-      grid-column: span 2;
-    }
+    .nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 8px; }
+    .nav-grid > .nav-item:last-child:nth-child(odd) { grid-column: span 2; }
 
     .vp-glass {
-      background: var(--vp-glass);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--vp-glass-border);
-      box-shadow: var(--vp-glass-shadow);
+      background: var(--vp-glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--vp-glass-border); box-shadow: var(--vp-glass-shadow);
     }
 
     .nav-item { 
@@ -265,8 +307,7 @@ const jsonLd = {
       padding: 20px 24px; border-radius: 24px; text-decoration: none; 
       color: var(--text-dark); font-weight: 600; opacity: 0; transform: translateY(30px);
       transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background-color 0.5s var(--ease), filter 1.5s ease-in-out;
-      will-change: transform, opacity; user-select: none; -webkit-user-select: none;
-      height: 100%;
+      will-change: transform, opacity; user-select: none; -webkit-user-select: none; height: 100%;
     }
     
     .nav-left-zone { display: flex; align-items: center; gap: 14px; }
@@ -344,10 +385,7 @@ const jsonLd = {
       .nav-grid { grid-template-columns: 1fr; }
       .nav-grid > .nav-item:last-child:nth-child(odd) { grid-column: span 1; }
       
-      .dynamic-island { margin-bottom: 24px; padding: 4px 14px 4px 4px; }
-      .island-avatar { width: 24px; height: 24px; }
-      .island-text { font-size: 11px; }
-
+      .island-wrapper { top: 6vh; }
       .hero h1 { font-size: 3.2rem !important; margin-bottom: 10px; }
       .hero-sub { font-size: 0.75rem; }
       
@@ -363,11 +401,6 @@ const jsonLd = {
       .email-chip { padding: 5px 10px !important; font-size: 8.5px !important; }
       .nav-item { padding: 18px 20px !important; border-radius: 20px !important; }
     }
-
-    @keyframes heroUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    @keyframes unblur { to { filter: blur(0); } }
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
 
     @media (prefers-reduced-motion: reduce) {
       *, ::before, ::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
@@ -388,12 +421,35 @@ const jsonLd = {
   </div>
 
   <section class="hero">
-    <!-- ✨ 纯正苹果风格：悬浮灵动岛 -->
-    <div class="dynamic-island">
-      <img src={globalIcon} alt="TQSY Avatar" class="island-avatar" />
-      <div class="island-info">
-        <span class="island-text">TQSY</span>
+    <!-- ✨ 神级缝合：悬浮灵动岛 (动态展开) -->
+    <div class="island-wrapper" id="dynamicIsland">
+      <!-- 背景层剥离，为了丝滑交叉淡入淡出 -->
+      <div class="island-bg-black"></div>
+      <div class="island-bg-glass"></div>
+
+      <!-- 1. 默认折叠形态 (深邃胶囊) -->
+      <div class="island-compact">
+        <img src={globalIcon} alt="Avatar" class="island-avatar-small" />
+        <div class="island-text-small">TQSY</div>
         <div class="status-dot"></div>
+      </div>
+
+      <!-- 2. 展开大卡形态 (毛玻璃勋章库) -->
+      <div class="island-expanded">
+        <img src={globalIcon} alt="TQSY Avatar Large" class="island-avatar-large" />
+        <div class="island-name-large">TQSY</div>
+        <div class="island-role-large">Weather Holy Salt</div>
+        <div class="island-badges">
+          <a href="https://github.com/TQSY114514" target="_blank" rel="noopener noreferrer" class="badge-icon" title="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="https://steamcommunity.com/profiles/76561199885694539/" target="_blank" rel="noopener noreferrer" class="badge-icon" title="Steam">
+            <svg viewBox="0 0 24 24"><path d="M11.979 0C5.362 0 .001 5.362.001 11.979c0 4.996 3.076 9.278 7.426 11.082l3.411-4.887c-.126-.416-.2-.848-.2-1.28 0-2.493 2.023-4.516 4.516-4.516s4.516 2.023 4.516 4.516-2.023 4.516-4.516 4.516c-1.405 0-2.659-.652-3.451-1.657l-4.994 3.473a11.942 11.942 0 003.284.448c6.617 0 11.978-5.362 11.978-11.979C23.957 5.362 18.596 0 11.979 0zM15.156 18.528c-1.01 0-1.83-.819-1.83-1.829 0-1.01.82-1.829 1.83-1.829s1.83.819 1.83 1.829c0 1.01-.82 1.829-1.83 1.829zm2.464-5.632A4.27 4.27 0 0015.156 11.6c-2.355 0-4.269 1.913-4.269 4.268 0 .428.067.842.186 1.233L7.747 19.46a4.542 4.542 0 01-3.833.84c-1.745-.487-2.77-2.302-2.285-4.048.486-1.745 2.301-2.77 4.047-2.284.957.266 1.705.932 2.13 1.765l3.483-4.996a4.254 4.254 0 01-1.39-3.138c0-2.355 1.913-4.268 4.268-4.268s4.268 1.913 4.268 4.268c0 1.865-1.196 3.451-2.815 4.03z"/></svg>
+          </a>
+          <a href="https://www.pixiv.net/users/118448914" target="_blank" rel="noopener noreferrer" class="badge-icon" title="Pixiv">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.765 4.06 10.573 9.531 11.725-.116-.957-.14-2.224.032-3.197.164-.93 1.096-4.647 1.096-4.647s-.273-.547-.273-1.355c0-1.27.734-2.219 1.652-2.219.774 0 1.15.582 1.15 1.281 0 .78-.496 1.942-.75 3.02-.215.91.46 1.652 1.356 1.652 1.63 0 2.886-1.72 2.886-4.2 0-2.197-1.578-3.734-3.834-3.734-2.613 0-4.148 1.96-4.148 3.988 0 .79.304 1.637.684 2.1.075.09.086.17.063.262-.07.29-.224.912-.255 1.037-.04.164-.135.2-.31.116-1.154-.537-1.874-2.223-1.874-3.578 0-2.913 2.117-5.589 6.104-5.589 3.203 0 5.693 2.283 5.693 5.334 0 3.183-2.007 5.746-4.793 5.746-.936 0-1.816-.486-2.117-1.06l-.578 2.2c-.21.797-.773 1.796-1.156 2.414C10.746 23.935 11.363 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
     
@@ -459,6 +515,20 @@ const jsonLd = {
   </address>
 
   <script is:inline>
+    // ✨ 手机端点击灵动岛展开逻辑
+    const dynamicIsland = document.getElementById('dynamicIsland');
+    if (dynamicIsland) {
+      dynamicIsland.addEventListener('click', (e) => {
+        if (window.innerWidth <= 600) {
+          dynamicIsland.classList.toggle('is-expanded');
+          e.stopPropagation();
+        }
+      });
+      document.addEventListener('click', () => {
+        dynamicIsland.classList.remove('is-expanded');
+      });
+    }
+
     const phrases = ["> WEATHER HOLY SALT", "> CYBER DEVELOPER", "> ACG ENTHUSIAST", "> GAMER"];
     const typeTarget = document.getElementById('typewriter');
     let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
