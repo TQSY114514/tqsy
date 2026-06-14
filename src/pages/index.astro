@@ -1,12 +1,11 @@
 ---
-// TQSY's Space - V3.0 终极仪表盘 (主控卡片 + 完美偶数补位网格)
+// TQSY's Space - V3.1 视觉平衡版 (绝对对称居中主控卡 + 完美偶数补位网格)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
 
 const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cfa-843a-e8ba865c9b46.webp";
 
-// ✨ 取消了 featured，恢复最整洁的统一数据结构
 const navData = [
   {
     category: "💻 Code & Dev",
@@ -177,31 +176,32 @@ const jsonLd = {
 
     .container { max-width: 580px; margin: 0 auto; padding: 0 20px 250px 20px; }
 
-    /* ✨ V3 核心：主角身份中控卡 */
+    /* ✨ V3.1 完美居中对称主控卡 */
     .hero-dashboard { margin-top: 10vh; margin-bottom: 40px; animation: heroUp 1.2s var(--ease) 0.2s both; }
     .main-profile-card {
-      border-radius: 32px; padding: 36px; display: flex; flex-direction: column; gap: 24px;
+      border-radius: 32px; padding: 36px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px;
       transition: filter 1.5s ease-in-out, opacity 0.8s var(--ease);
     }
     body.is-idle .main-profile-card { opacity: 0.35; filter: blur(4px); }
 
-    .profile-info { display: flex; align-items: center; gap: 24px; }
-    .profile-avatar { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 2px solid var(--vp-glass-border); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .profile-info { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+    .profile-avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 2px solid var(--vp-glass-border); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .profile-text { display: flex; flex-direction: column; align-items: center; }
     .profile-text h1 { font-size: 2.2rem; font-weight: 800; background: linear-gradient(var(--text-dark), var(--text-gray)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em; margin-bottom: 6px; }
     
-    .typewriter-box { display: flex; align-items: center; height: 18px; }
+    .typewriter-box { display: flex; justify-content: center; align-items: center; height: 18px; width: 100%; }
     .hero-sub { color: var(--text-gray); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.75rem; font-family: monospace; font-weight: 600; }
     .cursor { display: inline-block; width: 2px; height: 1.1em; background-color: var(--miku-green); margin-left: 6px; animation: blink 1s step-end infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* ✨ 核心勋章栏 */
-    .profile-badges { display: flex; gap: 16px; border-top: 1px solid var(--vp-glass-border); padding-top: 24px; }
+    /* ✨ 居中的核心勋章栏 */
+    .profile-badges { display: flex; justify-content: center; gap: 20px; border-top: 1px solid var(--vp-glass-border); padding-top: 24px; width: 100%; }
     .badge-icon { 
-      width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+      width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; 
       color: var(--text-dark); background: rgba(0,0,0,0.03); transition: 0.3s var(--ease);
     }
     @media (prefers-color-scheme: dark) { .badge-icon { background: rgba(255,255,255,0.05); } }
-    .badge-icon svg { width: 20px; height: 20px; fill: currentColor; }
+    .badge-icon svg { width: 22px; height: 22px; fill: currentColor; }
     @media (hover: hover) { .badge-icon:hover { background: var(--miku-green); color: #fff; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,207,181,0.2); } }
 
     .category-title {
@@ -212,7 +212,7 @@ const jsonLd = {
     .category-title.show { opacity: 0.8; transform: translateY(0); }
     body.is-idle .category-title { opacity: 0.3; }
 
-    /* ✨ 恢复绝对整洁的网格！ */
+    /* ✨ 完美的双列兜底网格 */
     .nav-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -220,7 +220,6 @@ const jsonLd = {
       margin-bottom: 8px;
     }
 
-    /* ✨ 仅仅给最后一个且是奇数个的卡片进行兜底补位 */
     .nav-grid > .nav-item:last-child:nth-child(odd) {
       grid-column: span 2;
     }
@@ -232,7 +231,6 @@ const jsonLd = {
       box-shadow: var(--vp-glass-shadow);
     }
 
-    /* ✨ 恢复按钮原本细腻统一的尺寸与样式 */
     .nav-item { 
       display: flex; align-items: center; justify-content: space-between; 
       padding: 20px 24px; border-radius: 24px; text-decoration: none; 
@@ -314,15 +312,17 @@ const jsonLd = {
     }
 
     @media (max-width: 600px) {
-      /* 手机端按钮恢复一列 */
       .nav-grid { grid-template-columns: 1fr; }
       .nav-grid > .nav-item:last-child:nth-child(odd) { grid-column: span 1; }
       
       .hero-dashboard { margin-top: 5vh; }
       .main-profile-card { padding: 24px; border-radius: 28px; gap: 20px; }
-      .profile-info { gap: 18px; }
-      .profile-avatar { width: 64px; height: 64px; }
+      .profile-info { gap: 12px; }
+      .profile-avatar { width: 72px; height: 72px; }
       .profile-text h1 { font-size: 1.8rem; }
+      .profile-badges { padding-top: 20px; gap: 16px; }
+      .badge-icon { width: 38px; height: 38px; }
+      .badge-icon svg { width: 18px; height: 18px; }
       
       .player-card { width: 190px !important; left: 10px !important; bottom: 10px !important; padding: 10px !important; gap: 6px !important; border-radius: 18px !important; }
       .album-cover { width: 32px !important; height: 32px !important; border-radius: 8px !important; }
