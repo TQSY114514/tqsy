@@ -1,17 +1,17 @@
 ---
-// TQSY's Space - Cyber Digital Identity 工业级终极完美版 (Bento异形大卡 + 震动 + 打字机 + 音乐记忆)
+// TQSY's Space - V3.0 终极仪表盘 (主控卡片 + 完美偶数补位网格)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
 
 const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cfa-843a-e8ba865c9b46.webp";
 
-// ✨ 加入 featured 属性，控制 Bento 异形主角卡片
+// ✨ 取消了 featured，恢复最整洁的统一数据结构
 const navData = [
   {
     category: "💻 Code & Dev",
     items: [
-      { name: "GitHub", featured: true, url: "https://github.com/TQSY114514", svg: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" },
+      { name: "GitHub", url: "https://github.com/TQSY114514", svg: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" },
       { name: "Luogu", url: "https://luogu.com.cn/user/1849345", svg: "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 4c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm0 15.5c-2.674 0-5.105-1.32-6.59-3.371.033-2.14 4.379-3.329 6.59-3.329s6.557 1.189 6.59 3.329c-1.485 2.051-3.916 3.371-6.59 3.371z" },
       { name: "IOI Code", url: "https://www.ioicode.com/user/54562", svg: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" },
       { name: "Codemao", url: "https://shequ.codemao.cn/user/1574587147", svg: "M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2m0-2C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm.5 13.5l3.5 3.5-1.5 1.5-3.5-3.5V11h-2V9h2V5.5l1.5 1.5V11h2v2h-2z" }
@@ -20,7 +20,7 @@ const navData = [
   {
     category: "🎮 Gaming",
     items: [
-      { name: "Steam", featured: true, url: "https://steamcommunity.com/profiles/76561199885694539/", svg: "M11.979 0C5.362 0 .001 5.362.001 11.979c0 4.996 3.076 9.278 7.426 11.082l3.411-4.887c-.126-.416-.2-.848-.2-1.28 0-2.493 2.023-4.516 4.516-4.516s4.516 2.023 4.516 4.516-2.023 4.516-4.516 4.516c-1.405 0-2.659-.652-3.451-1.657l-4.994 3.473a11.942 11.942 0 003.284.448c6.617 0 11.978-5.362 11.978-11.979C23.957 5.362 18.596 0 11.979 0zM15.156 18.528c-1.01 0-1.83-.819-1.83-1.829 0-1.01.82-1.829 1.83-1.829s1.83.819 1.83 1.829c0 1.01-.82 1.829-1.83 1.829zm2.464-5.632A4.27 4.27 0 0015.156 11.6c-2.355 0-4.269 1.913-4.269 4.268 0 .428.067.842.186 1.233L7.747 19.46a4.542 4.542 0 01-3.833.84c-1.745-.487-2.77-2.302-2.285-4.048.486-1.745 2.301-2.77 4.047-2.284.957.266 1.705.932 2.13 1.765l3.483-4.996a4.254 4.254 0 01-1.39-3.138c0-2.355 1.913-4.268 4.268-4.268s4.268 1.913 4.268 4.268c0 1.865-1.196 3.451-2.815 4.03z" },
+      { name: "Steam", url: "https://steamcommunity.com/profiles/76561199885694539/", svg: "M11.979 0C5.362 0 .001 5.362.001 11.979c0 4.996 3.076 9.278 7.426 11.082l3.411-4.887c-.126-.416-.2-.848-.2-1.28 0-2.493 2.023-4.516 4.516-4.516s4.516 2.023 4.516 4.516-2.023 4.516-4.516 4.516c-1.405 0-2.659-.652-3.451-1.657l-4.994 3.473a11.942 11.942 0 003.284.448c6.617 0 11.978-5.362 11.978-11.979C23.957 5.362 18.596 0 11.979 0zM15.156 18.528c-1.01 0-1.83-.819-1.83-1.829 0-1.01.82-1.829 1.83-1.829s1.83.819 1.83 1.829c0 1.01-.82 1.829-1.83 1.829zm2.464-5.632A4.27 4.27 0 0015.156 11.6c-2.355 0-4.269 1.913-4.269 4.268 0 .428.067.842.186 1.233L7.747 19.46a4.542 4.542 0 01-3.833.84c-1.745-.487-2.77-2.302-2.285-4.048.486-1.745 2.301-2.77 4.047-2.284.957.266 1.705.932 2.13 1.765l3.483-4.996a4.254 4.254 0 01-1.39-3.138c0-2.355 1.913-4.268 4.268-4.268s4.268 1.913 4.268 4.268c0 1.865-1.196 3.451-2.815 4.03z" },
       { name: "Epic Games", url: "https://store.epicgames.com/u/534df435083b40dbb61f5d929ed60353", svg: "M12 0L1.74 3.16v13.06L12 24l10.26-7.78V3.16L12 0zm7.31 15.54h-3.47v-2.07h3.47v2.07zm-4.71-3.64H6.84V9.83h7.76v2.07zm4.71-3.64h-3.47V6.19h3.47v2.07z" },
       { name: "Xbox", url: "https://www.xbox.com/en-SG/play/user/TQSY9851", svg: "M11.895 0C5.32 0 0 5.32 0 11.895c0 6.574 5.32 11.894 11.895 11.894 6.574 0 11.894-5.32 11.894-11.894C23.789 5.32 18.468 0 11.895 0zm-5.78 4.218A9.704 9.704 0 0111.895 2.16c2.189 0 4.208.724 5.82 1.938-.857.77-2.782 1.932-5.736 2.37-3.08-.458-5.045-1.667-5.864-2.25zm11.233 2.152c1.944 1.554 2.809 3.528 2.809 5.525 0 2.22-.924 4.093-2.316 5.419-1.077-2.355-3.322-4.141-5.727-4.607 2.126-1.127 4.144-3.344 5.234-6.337zM4.603 6.435c1.107 3 3.126 5.216 5.23 6.326-2.39.467-4.655 2.258-5.71 4.603-1.385-1.332-2.316-3.195-2.316-5.415 0-1.996.862-3.955 2.796-5.514zm1.182 11.13c2.03-1.636 4.316-2.12 6.11-2.12 1.776 0 4.088.484 6.136 2.138A9.728 9.728 0 0111.894 21.63a9.75 9.75 0 01-6.109-4.065z" }
     ]
@@ -171,33 +171,39 @@ const jsonLd = {
     body.is-idle .bg-glow-2 { animation: aurora-2 12s infinite ease-in-out; }
 
     @media (hover: hover) {
-      body.is-idle .nav-list:hover .nav-item { opacity: 1; filter: blur(0); }
+      body.is-idle .nav-list:hover .nav-item, body.is-idle .hero-dashboard:hover .main-profile-card { opacity: 1; filter: blur(0); }
       body.is-idle .nav-list:hover .category-title { opacity: 0.8; }
     }
 
-    .hero { 
-      height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
-      animation: heroUp 1.2s var(--ease) 0.2s both; user-select: none; -webkit-user-select: none;
+    .container { max-width: 580px; margin: 0 auto; padding: 0 20px 250px 20px; }
+
+    /* ✨ V3 核心：主角身份中控卡 */
+    .hero-dashboard { margin-top: 10vh; margin-bottom: 40px; animation: heroUp 1.2s var(--ease) 0.2s both; }
+    .main-profile-card {
+      border-radius: 32px; padding: 36px; display: flex; flex-direction: column; gap: 24px;
+      transition: filter 1.5s ease-in-out, opacity 0.8s var(--ease);
     }
-    .hero h1 { 
-      font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; 
-      background: linear-gradient(var(--text-dark), var(--text-gray)); 
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-      filter: blur(10px); text-shadow: 0 0 30px rgba(0,0,0,0.02);
-      animation: unblur 1.2s var(--ease) 0.3s both;
-    }
+    body.is-idle .main-profile-card { opacity: 0.35; filter: blur(4px); }
+
+    .profile-info { display: flex; align-items: center; gap: 24px; }
+    .profile-avatar { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 2px solid var(--vp-glass-border); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .profile-text h1 { font-size: 2.2rem; font-weight: 800; background: linear-gradient(var(--text-dark), var(--text-gray)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em; margin-bottom: 6px; }
     
-    /* ✨ 打字机容器样式 */
-    .typewriter-box {
-      display: flex; align-items: center; justify-content: center; margin-top: 10px; height: 20px;
-      opacity: 0; animation: fadeIn 1s var(--ease) 0.8s forwards;
-    }
-    .hero-sub { color: var(--text-gray); letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.85rem; font-family: monospace; }
+    .typewriter-box { display: flex; align-items: center; height: 18px; }
+    .hero-sub { color: var(--text-gray); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.75rem; font-family: monospace; font-weight: 600; }
     .cursor { display: inline-block; width: 2px; height: 1.1em; background-color: var(--miku-green); margin-left: 6px; animation: blink 1s step-end infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    .container { max-width: 580px; margin: 0 auto; padding: 0 20px 250px 20px; }
-    
+    /* ✨ 核心勋章栏 */
+    .profile-badges { display: flex; gap: 16px; border-top: 1px solid var(--vp-glass-border); padding-top: 24px; }
+    .badge-icon { 
+      width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+      color: var(--text-dark); background: rgba(0,0,0,0.03); transition: 0.3s var(--ease);
+    }
+    @media (prefers-color-scheme: dark) { .badge-icon { background: rgba(255,255,255,0.05); } }
+    .badge-icon svg { width: 20px; height: 20px; fill: currentColor; }
+    @media (hover: hover) { .badge-icon:hover { background: var(--miku-green); color: #fff; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,207,181,0.2); } }
+
     .category-title {
       font-size: 11px; font-weight: 700; color: var(--text-gray); letter-spacing: 0.25em; text-transform: uppercase;
       margin: 40px 0 16px 12px; opacity: 0; transform: translateY(20px);
@@ -206,6 +212,7 @@ const jsonLd = {
     .category-title.show { opacity: 0.8; transform: translateY(0); }
     body.is-idle .category-title { opacity: 0.3; }
 
+    /* ✨ 恢复绝对整洁的网格！ */
     .nav-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -213,7 +220,7 @@ const jsonLd = {
       margin-bottom: 8px;
     }
 
-    /* ✨ 孤儿卡片被动撑满逻辑 (兜底) */
+    /* ✨ 仅仅给最后一个且是奇数个的卡片进行兜底补位 */
     .nav-grid > .nav-item:last-child:nth-child(odd) {
       grid-column: span 2;
     }
@@ -225,6 +232,7 @@ const jsonLd = {
       box-shadow: var(--vp-glass-shadow);
     }
 
+    /* ✨ 恢复按钮原本细腻统一的尺寸与样式 */
     .nav-item { 
       display: flex; align-items: center; justify-content: space-between; 
       padding: 20px 24px; border-radius: 24px; text-decoration: none; 
@@ -233,22 +241,9 @@ const jsonLd = {
       will-change: transform, opacity; user-select: none; -webkit-user-select: none;
       height: 100%;
     }
-
-    /* ✨ 异形大卡片的主动高亮样式 */
-    .nav-item.featured {
-      grid-column: span 2;
-      background: var(--glass-hover);
-      padding: 24px 28px;
-    }
-    .nav-item.featured svg {
-      width: 22px; height: 22px; color: var(--miku-green);
-    }
-    .nav-item.featured span:not(.arrow) {
-      font-size: 1.1em; letter-spacing: 0.05em;
-    }
     
     .nav-left-zone { display: flex; align-items: center; gap: 14px; }
-    .nav-item svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; transition: transform 0.4s var(--ease), color 0.4s var(--ease); }
+    .nav-item svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; transition: transform 0.4s var(--ease); }
     .nav-item span { transition: color 0.4s var(--ease); }
     .nav-item .arrow { color: var(--text-gray); opacity: 0.6; font-family: monospace; }
     .nav-item.show { opacity: 1; transform: translateY(0); }
@@ -319,10 +314,15 @@ const jsonLd = {
     }
 
     @media (max-width: 600px) {
+      /* 手机端按钮恢复一列 */
       .nav-grid { grid-template-columns: 1fr; }
       .nav-grid > .nav-item:last-child:nth-child(odd) { grid-column: span 1; }
-      /* 手机端主角卡片也恢复 1 列 */
-      .nav-item.featured { grid-column: span 1; padding: 20px 24px; }
+      
+      .hero-dashboard { margin-top: 5vh; }
+      .main-profile-card { padding: 24px; border-radius: 28px; gap: 20px; }
+      .profile-info { gap: 18px; }
+      .profile-avatar { width: 64px; height: 64px; }
+      .profile-text h1 { font-size: 1.8rem; }
       
       .player-card { width: 190px !important; left: 10px !important; bottom: 10px !important; padding: 10px !important; gap: 6px !important; border-radius: 18px !important; }
       .album-cover { width: 32px !important; height: 32px !important; border-radius: 8px !important; }
@@ -334,7 +334,6 @@ const jsonLd = {
       .progress-bar-bg { height: 3px !important; }
       .contact-panel { right: 10px !important; bottom: 10px !important; gap: 4px !important; }
       .email-chip { padding: 5px 10px !important; font-size: 8.5px !important; }
-      .hero h1 { font-size: 3.2rem !important; }
       .nav-item { padding: 18px 20px !important; border-radius: 20px !important; }
     }
 
@@ -361,12 +360,30 @@ const jsonLd = {
     <div class="bg-noise"></div>
   </div>
 
-  <section class="hero">
-    <h1>{title}</h1>
-    <div class="typewriter-box">
-      <span class="hero-sub" id="typewriter"></span><span class="cursor"></span>
+  <header class="hero-dashboard container">
+    <div class="main-profile-card vp-glass">
+      <div class="profile-info">
+        <img src={globalIcon} alt="TQSY Avatar" class="profile-avatar" />
+        <div class="profile-text">
+          <h1>TQSY</h1>
+          <div class="typewriter-box">
+            <span class="hero-sub" id="typewriter"></span><span class="cursor"></span>
+          </div>
+        </div>
+      </div>
+      <div class="profile-badges">
+        <a href="https://github.com/TQSY114514" target="_blank" rel="noopener noreferrer" class="badge-icon" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://steamcommunity.com/profiles/76561199885694539/" target="_blank" rel="noopener noreferrer" class="badge-icon" title="Steam" aria-label="Steam">
+          <svg viewBox="0 0 24 24"><path d="M11.979 0C5.362 0 .001 5.362.001 11.979c0 4.996 3.076 9.278 7.426 11.082l3.411-4.887c-.126-.416-.2-.848-.2-1.28 0-2.493 2.023-4.516 4.516-4.516s4.516 2.023 4.516 4.516-2.023 4.516-4.516 4.516c-1.405 0-2.659-.652-3.451-1.657l-4.994 3.473a11.942 11.942 0 003.284.448c6.617 0 11.978-5.362 11.978-11.979C23.957 5.362 18.596 0 11.979 0zM15.156 18.528c-1.01 0-1.83-.819-1.83-1.829 0-1.01.82-1.829 1.83-1.829s1.83.819 1.83 1.829c0 1.01-.82 1.829-1.83 1.829zm2.464-5.632A4.27 4.27 0 0015.156 11.6c-2.355 0-4.269 1.913-4.269 4.268 0 .428.067.842.186 1.233L7.747 19.46a4.542 4.542 0 01-3.833.84c-1.745-.487-2.77-2.302-2.285-4.048.486-1.745 2.301-2.77 4.047-2.284.957.266 1.705.932 2.13 1.765l3.483-4.996a4.254 4.254 0 01-1.39-3.138c0-2.355 1.913-4.268 4.268-4.268s4.268 1.913 4.268 4.268c0 1.865-1.196 3.451-2.815 4.03z"/></svg>
+        </a>
+        <a href="https://www.pixiv.net/users/118448914" target="_blank" rel="noopener noreferrer" class="badge-icon" title="Pixiv" aria-label="Pixiv">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.765 4.06 10.573 9.531 11.725-.116-.957-.14-2.224.032-3.197.164-.93 1.096-4.647 1.096-4.647s-.273-.547-.273-1.355c0-1.27.734-2.219 1.652-2.219.774 0 1.15.582 1.15 1.281 0 .78-.496 1.942-.75 3.02-.215.91.46 1.652 1.356 1.652 1.63 0 2.886-1.72 2.886-4.2 0-2.197-1.578-3.734-3.834-3.734-2.613 0-4.148 1.96-4.148 3.988 0 .79.304 1.637.684 2.1.075.09.086.17.063.262-.07.29-.224.912-.255 1.037-.04.164-.135.2-.31.116-1.154-.537-1.874-2.223-1.874-3.578 0-2.913 2.117-5.589 6.104-5.589 3.203 0 5.693 2.283 5.693 5.334 0 3.183-2.007 5.746-4.793 5.746-.936 0-1.816-.486-2.117-1.06l-.578 2.2c-.21.797-.773 1.796-1.156 2.414C10.746 23.935 11.363 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </a>
+      </div>
     </div>
-  </section>
+  </header>
 
   <main class="container">
     <nav class="nav-list" id="navList" aria-label="个人主页导航矩阵">
@@ -375,7 +392,7 @@ const jsonLd = {
           <div class="category-title">{group.category}</div>
           <div class="nav-grid">
             {group.items.map(item => (
-              <a href={item.url} target="_blank" rel="noopener noreferrer" class={`nav-item vp-glass ${item.featured ? 'featured' : ''}`}>
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="nav-item vp-glass">
                 <div class="nav-left-zone">
                   <svg viewBox="0 0 24 24"><path d={item.svg}></path></svg>
                   <span>{item.name}</span>
@@ -423,7 +440,6 @@ const jsonLd = {
   </address>
 
   <script is:inline>
-    // ✨ 1. 打字机逻辑
     const phrases = ["> WEATHER HOLY SALT", "> CYBER DEVELOPER", "> ACG ENTHUSIAST", "> GAMER"];
     const typeTarget = document.getElementById('typewriter');
     let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
@@ -629,7 +645,6 @@ const jsonLd = {
       }
     };
 
-    // ✨ 2. 音乐记忆存储与读取
     const initAudioDuration = () => {
       if (audio.duration && !isNaN(audio.duration)) {
         timeTotal.textContent = formatTime(audio.duration);
@@ -668,8 +683,6 @@ const jsonLd = {
       chip.onclick = (e) => { 
         e.preventDefault(); 
         if(isCopying) return;
-
-        // ✨ 3. 物理震动反馈 (极客沉浸感)
         if (navigator.vibrate) navigator.vibrate(30);
 
         navigator.clipboard.writeText(realEmail).then(() => {
