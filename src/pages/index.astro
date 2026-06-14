@@ -1,5 +1,5 @@
 ---
-// TQSY's Space - V3.3 胶囊铭牌版 (完美解决头像突兀问题 + 全屏呼吸感)
+// TQSY's Space - V3.4 灵动岛版 (Dynamic Island + 无界大标题 + 完美网格)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
@@ -174,29 +174,46 @@ const jsonLd = {
       body.is-idle .nav-list:hover .category-title { opacity: 0.8; }
     }
 
-    /* ✨ V3.3 核心：无界科幻大标题 + 胶囊铭牌 */
+    /* ✨ V3.4 纯正灵动岛 Hero 区 */
     .hero { 
       height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
       user-select: none; -webkit-user-select: none;
     }
     
-    /* 胶囊铭牌形态的头像区域 */
-    .hero-badge {
+    /* 🍏 灵动岛核心样式 */
+    .dynamic-island {
       display: flex; align-items: center; gap: 10px;
-      padding: 6px 20px 6px 6px; border-radius: 50px;
+      padding: 6px 16px 6px 6px; border-radius: 999px;
       margin-bottom: 30px;
-      background: var(--vp-glass);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--vp-glass-border);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-      opacity: 0; animation: heroUp 1s var(--ease) 0.1s both;
+      background-color: #000;
+      color: #fff;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.12);
+      opacity: 0; transform: translateY(-30px) scale(0.9);
+      animation: islandDrop 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+      z-index: 10;
     }
-    .badge-avatar {
-      width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+    @media (prefers-color-scheme: dark) {
+      .dynamic-island { box-shadow: 0 16px 40px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.08); }
     }
-    .badge-text {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
-      color: var(--text-dark); text-transform: uppercase;
+    @keyframes islandDrop { to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    .island-avatar {
+      width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
+    }
+    
+    .island-info { display: flex; align-items: center; gap: 8px; }
+    .island-text { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; }
+    
+    /* ✨ 灵动岛摄像头/状态呼吸灯 */
+    .status-dot {
+      width: 6px; height: 6px; background-color: var(--miku-green); border-radius: 50%;
+      box-shadow: 0 0 8px var(--miku-green);
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(0, 207, 181, 0.5); }
+      70% { box-shadow: 0 0 0 6px rgba(0, 207, 181, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 207, 181, 0); }
     }
 
     .hero h1 { 
@@ -214,7 +231,6 @@ const jsonLd = {
     }
     .hero-sub { color: var(--text-gray); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; font-family: monospace; font-weight: 600; }
     .cursor { display: inline-block; width: 2px; height: 1.1em; background-color: var(--miku-green); margin-left: 6px; animation: blink 1s step-end infinite; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
     .container { max-width: 580px; margin: 0 auto; padding: 0 20px 250px 20px; }
 
@@ -328,7 +344,10 @@ const jsonLd = {
       .nav-grid { grid-template-columns: 1fr; }
       .nav-grid > .nav-item:last-child:nth-child(odd) { grid-column: span 1; }
       
-      .hero-badge { margin-bottom: 20px; }
+      .dynamic-island { margin-bottom: 24px; padding: 4px 14px 4px 4px; }
+      .island-avatar { width: 24px; height: 24px; }
+      .island-text { font-size: 11px; }
+
       .hero h1 { font-size: 3.2rem !important; margin-bottom: 10px; }
       .hero-sub { font-size: 0.75rem; }
       
@@ -368,13 +387,18 @@ const jsonLd = {
     <div class="bg-noise"></div>
   </div>
 
-  <!-- ✨ V3.3 完美解决突兀感的“胶囊铭牌 + 全屏巨幕” -->
   <section class="hero">
-    <div class="hero-badge">
-      <img src={globalIcon} alt="TQSY" class="badge-avatar" />
-      <span class="badge-text">TQSY / 天气圣言</span>
+    <!-- ✨ 纯正苹果风格：悬浮灵动岛 -->
+    <div class="dynamic-island">
+      <img src={globalIcon} alt="TQSY Avatar" class="island-avatar" />
+      <div class="island-info">
+        <span class="island-text">TQSY</span>
+        <div class="status-dot"></div>
+      </div>
     </div>
+    
     <h1>{title}</h1>
+    
     <div class="typewriter-box">
       <span class="hero-sub" id="typewriter"></span><span class="cursor"></span>
     </div>
