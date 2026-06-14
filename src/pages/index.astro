@@ -1,5 +1,5 @@
 ---
-// TQSY's Space - V3.2 科幻电影融合版 (全屏大标题 + 头像 + 打字机 + 完美网格)
+// TQSY's Space - V3.3 胶囊铭牌版 (完美解决头像突兀问题 + 全屏呼吸感)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
@@ -174,33 +174,45 @@ const jsonLd = {
       body.is-idle .nav-list:hover .category-title { opacity: 0.8; }
     }
 
-    /* ✨ 恢复原始的全屏呼吸感 Hero 区 */
+    /* ✨ V3.3 核心：无界科幻大标题 + 胶囊铭牌 */
     .hero { 
       height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
       user-select: none; -webkit-user-select: none;
     }
     
-    .hero-avatar {
-      width: 88px; height: 88px; border-radius: 50%; object-fit: cover;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      margin-bottom: 24px;
+    /* 胶囊铭牌形态的头像区域 */
+    .hero-badge {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 20px 6px 6px; border-radius: 50px;
+      margin-bottom: 30px;
+      background: var(--vp-glass);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--vp-glass-border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
       opacity: 0; animation: heroUp 1s var(--ease) 0.1s both;
-      border: 2px solid var(--vp-glass-border);
+    }
+    .badge-avatar {
+      width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+    }
+    .badge-text {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+      color: var(--text-dark); text-transform: uppercase;
     }
 
     .hero h1 { 
-      font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; 
+      font-size: clamp(3.2rem, 10vw, 6.5rem); font-weight: 800; 
       background: linear-gradient(var(--text-dark), var(--text-gray)); 
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
       filter: blur(10px); text-shadow: 0 0 30px rgba(0,0,0,0.02);
       animation: unblur 1.2s var(--ease) 0.3s both;
+      line-height: 1.1; margin-bottom: 12px;
     }
     
     .typewriter-box {
-      display: flex; align-items: center; justify-content: center; margin-top: 10px; height: 20px;
+      display: flex; align-items: center; justify-content: center; height: 20px;
       opacity: 0; animation: fadeIn 1s var(--ease) 0.8s forwards;
     }
-    .hero-sub { color: var(--text-gray); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.8rem; font-family: monospace; font-weight: 600; }
+    .hero-sub { color: var(--text-gray); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; font-family: monospace; font-weight: 600; }
     .cursor { display: inline-block; width: 2px; height: 1.1em; background-color: var(--miku-green); margin-left: 6px; animation: blink 1s step-end infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
@@ -316,8 +328,9 @@ const jsonLd = {
       .nav-grid { grid-template-columns: 1fr; }
       .nav-grid > .nav-item:last-child:nth-child(odd) { grid-column: span 1; }
       
-      .hero-avatar { width: 72px; height: 72px; margin-bottom: 20px; }
-      .hero h1 { font-size: 3.2rem !important; }
+      .hero-badge { margin-bottom: 20px; }
+      .hero h1 { font-size: 3.2rem !important; margin-bottom: 10px; }
+      .hero-sub { font-size: 0.75rem; }
       
       .player-card { width: 190px !important; left: 10px !important; bottom: 10px !important; padding: 10px !important; gap: 6px !important; border-radius: 18px !important; }
       .album-cover { width: 32px !important; height: 32px !important; border-radius: 8px !important; }
@@ -355,8 +368,12 @@ const jsonLd = {
     <div class="bg-noise"></div>
   </div>
 
+  <!-- ✨ V3.3 完美解决突兀感的“胶囊铭牌 + 全屏巨幕” -->
   <section class="hero">
-    <img src={globalIcon} alt="TQSY Avatar" class="hero-avatar" />
+    <div class="hero-badge">
+      <img src={globalIcon} alt="TQSY" class="badge-avatar" />
+      <span class="badge-text">TQSY / 天气圣言</span>
+    </div>
     <h1>{title}</h1>
     <div class="typewriter-box">
       <span class="hero-sub" id="typewriter"></span><span class="cursor"></span>
