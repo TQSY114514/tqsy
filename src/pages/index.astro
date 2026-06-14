@@ -1,5 +1,5 @@
 ---
-// TQSY's Space - V3.7 终极至简完全体 (纯粹大标题 + 打字机 + 完美偶数补位网格)
+// TQSY's Space - V3.8 稳定修复版 (纯净极简大标题 + 修复播放器隐身 Bug)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
@@ -257,6 +257,8 @@ const jsonLd = {
       z-index: 1000; opacity: 0; animation: slideInLeft 1.2s var(--ease) 1s forwards;
       will-change: transform, opacity; user-select: none; -webkit-user-select: none;
     }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+
     .player-upper { display: flex; align-items: center; gap: 12px; }
     .album-cover { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; transition: 0.4s var(--ease); pointer-events: none; }
     .is-playing .album-cover { box-shadow: 0 0 20px rgba(0,207,181,0.25); transform: scale(1.02); }
@@ -325,6 +327,8 @@ const jsonLd = {
       .email-chip { opacity: 1; transform: translateX(0) !important; }
       body.is-idle .bg-glow-1, body.is-idle .bg-glow-2 { animation: none !important; } 
       .hero h1 { filter: none !important; opacity: 1 !important; transform: none !important; }
+      /* 强制显示播放器，无视系统减弱动画设置 */
+      .player-card { opacity: 1 !important; transform: none !important; animation: none !important; }
     }
   </style>
 </head>
