@@ -1,5 +1,5 @@
 ---
-// TQSY's Space - V3.8 稳定修复版 (纯净极简大标题 + 修复播放器隐身 Bug)
+// TQSY's Space - V3.9 响应式星海版 (纯净极简大标题 + 自适应粒子密度)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy114514"; 
@@ -174,13 +174,11 @@ const jsonLd = {
       body.is-idle .nav-list:hover .category-title { opacity: 0.8; }
     }
 
-    /* 🎬 经典纯粹无界 Hero 区 */
     .hero { 
       height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
       user-select: none; -webkit-user-select: none;
     }
 
-    /* 💎 彻底移除大标题模糊渲染Bug的终极动画 */
     .hero h1 { 
       font-size: clamp(3.2rem, 10vw, 6.5rem); font-weight: 800; 
       background: linear-gradient(var(--text-dark), var(--text-gray)); 
@@ -211,7 +209,6 @@ const jsonLd = {
     .category-title.show { opacity: 0.8; transform: translateY(0); }
     body.is-idle .category-title { opacity: 0.3; }
 
-    /* 🍱 完美的对称双列便当盒网格 */
     .nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 8px; }
     .nav-grid > .nav-item:last-child:nth-child(odd) { grid-column: span 2; }
 
@@ -327,7 +324,6 @@ const jsonLd = {
       .email-chip { opacity: 1; transform: translateX(0) !important; }
       body.is-idle .bg-glow-1, body.is-idle .bg-glow-2 { animation: none !important; } 
       .hero h1 { filter: none !important; opacity: 1 !important; transform: none !important; }
-      /* 强制显示播放器，无视系统减弱动画设置 */
       .player-card { opacity: 1 !important; transform: none !important; animation: none !important; }
     }
   </style>
@@ -404,7 +400,6 @@ const jsonLd = {
   </address>
 
   <script is:inline>
-    // ⌨️ 纯正打字机引擎
     const phrases = ["> WEATHER HOLY SALT", "> CYBER DEVELOPER", "> ACG ENTHUSIAST", "> GAMER"];
     const typeTarget = document.getElementById('typewriter');
     let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
@@ -432,7 +427,9 @@ const jsonLd = {
     const particleCanvas = document.getElementById('particleCanvas');
     if (particleCanvas && !prefersReducedMotion) {
       const ctx = particleCanvas.getContext('2d');
-      const PARTICLE_COUNT = 30;
+      // ✨ 核心响应式升级：根据屏幕宽度动态决定粒子数量
+      const getParticleCount = (w) => w > 768 ? 85 : 30;
+      
       const RADIUS = 2.4;
       const DIAMETER = RADIUS * 2;
       const CONNECT_DISTANCE = 145;
@@ -459,8 +456,11 @@ const jsonLd = {
         particleCanvas.style.height = `${height}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+        // ✨ 动态分配粒子数组 (无缝增加或裁剪)
+        const targetCount = getParticleCount(width);
+
         if (particles.length === 0) {
-          particles = Array.from({ length: PARTICLE_COUNT }, () => {
+          particles = Array.from({ length: targetCount }, () => {
             const angle = Math.random() * Math.PI * 2;
             return {
               x: RADIUS + Math.random() * (width - DIAMETER),
@@ -469,6 +469,19 @@ const jsonLd = {
               vy: Math.sin(angle) * BASE_SPEED,
             };
           });
+        } else if (particles.length < targetCount) {
+          const newParticles = Array.from({ length: targetCount - particles.length }, () => {
+            const angle = Math.random() * Math.PI * 2;
+            return {
+              x: RADIUS + Math.random() * (width - DIAMETER),
+              y: RADIUS + Math.random() * (height - DIAMETER),
+              vx: Math.cos(angle) * BASE_SPEED,
+              vy: Math.sin(angle) * BASE_SPEED,
+            };
+          });
+          particles = particles.concat(newParticles);
+        } else if (particles.length > targetCount) {
+          particles = particles.slice(0, targetCount);
         }
       };
 
