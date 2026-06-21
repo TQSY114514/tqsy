@@ -641,6 +641,44 @@ const jsonLd = {
       timeCurrent.textContent = formatTime(audio.currentTime);
     });
 
+    // ✨ 7. 极客专属：全局键盘媒体控制 (Global Media Shortcuts)
+    window.addEventListener('keydown', (e) => {
+      // 忽略辅助按键组合，避免和系统快捷键冲突
+      if (e.ctrlKey || e.altKey || e.metaKey) return;
+      
+      switch (e.code) {
+        case 'Space':
+          e.preventDefault(); // 阻止空格键默认向下滚动网页的恶心行径
+          playBtn.click();
+          break;
+        case 'ArrowRight':
+          e.preventDefault(); // 阻止页面原生横向滚动
+          if (audio.duration) {
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+            // 如果是在暂停状态下快进，手动刷新一下 UI
+            if (audio.paused) {
+               const percent = (audio.currentTime / audio.duration) * 100;
+               progressFill.style.width = `${percent}%`;
+               progressSlider.value = percent;
+               timeCurrent.textContent = formatTime(audio.currentTime);
+            }
+          }
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          if (audio.duration) {
+            audio.currentTime = Math.max(0, audio.currentTime - 5);
+            if (audio.paused) {
+               const percent = (audio.currentTime / audio.duration) * 100;
+               progressFill.style.width = `${percent}%`;
+               progressSlider.value = percent;
+               timeCurrent.textContent = formatTime(audio.currentTime);
+            }
+          }
+          break;
+      }
+    });
+
     const emailChips = document.querySelectorAll('.email-chip');
     emailChips.forEach(chip => {
       const realEmail = `${chip.getAttribute('data-user')}@${chip.getAttribute('data-host')}`;
