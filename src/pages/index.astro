@@ -195,7 +195,7 @@ const jsonLd = {
       background: radial-gradient(closest-side, rgba(0, 207, 181, 0.15) 0%, rgba(0, 207, 181, 0) 100%); 
     }
     .bg-glow-2 { 
-      position: absolute; bottom: -20%; left: -20%; width: 80vmax; height: 80vmax;
+      position: absolute; bottom: -20%; left: -20%; width: 80vmax; height: 80vmax; 
       background: radial-gradient(closest-side, rgba(0, 163, 224, 0.12) 0%, rgba(0, 163, 224, 0) 100%); 
     }
     .particle-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -411,7 +411,7 @@ const jsonLd = {
     </nav>
 
     <footer class="source-footer">
-      <a href="https://github.com/TQSY114514/tqsy114514" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/TQSY114514/tqsy" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 16 16" width="13" height="13"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
         <span>Open-source on GitHub</span>
       </a>
@@ -668,19 +668,17 @@ const jsonLd = {
 
     // ✨ 7. 极客专属：全局键盘媒体控制 (Global Media Shortcuts)
     window.addEventListener('keydown', (e) => {
-      // 忽略辅助按键组合，避免和系统快捷键冲突
       if (e.ctrlKey || e.altKey || e.metaKey) return;
       
       switch (e.code) {
         case 'Space':
-          e.preventDefault(); // 阻止空格键默认向下滚动网页的行径
+          e.preventDefault();
           playBtn.click();
           break;
         case 'ArrowRight':
-          e.preventDefault(); // 阻止页面原生横向滚动
+          e.preventDefault();
           if (audio.duration) {
             audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
-            // 如果是在暂停状态下快进，手动刷新一下 UI
             if (audio.paused) {
                const percent = (audio.currentTime / audio.duration) * 100;
                progressFill.style.width = `${percent}%`;
@@ -708,7 +706,7 @@ const jsonLd = {
     emailChips.forEach(chip => {
       const realEmail = `${chip.getAttribute('data-user')}@${chip.getAttribute('data-host')}`;
       chip.textContent = realEmail;
-      chip.setAttribute('data-ready', 'true'); // ✨ 赋予就绪标识，防止 Loading 闪烁
+      chip.setAttribute('data-ready', 'true');
       
       let isCopying = false;
       chip.onclick = (e) => { 
