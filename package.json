@@ -1,5 +1,8 @@
 {
-  "name": "astro-micro",
+  "name": "tqsy",
+  "author": "TQSY114514",
+  "license": "MIT",
+  "private": true,
   "type": "module",
   "version": "0.0.1",
   "scripts": {
