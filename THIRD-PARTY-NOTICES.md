@@ -1,7 +1,10 @@
 # 第三方声明 / Third-Party Notices
 
-本项目的结构脚手架起始于 `astro-micro` 模板（MIT License）。按 MIT 条款要求，
-模板的原始版权声明保留于下。项目自身的内容、设计系统与代码版权归 TQSY114514 所有（见 `LICENSE`）。
+本项目的结构脚手架源自 `astro-micro` 模板（MIT License），仓库内相当部分文件仍为该模板原样文件。
+按 MIT 条款要求，模板的原始版权声明完整保留于下。
+
+`LICENSE` 文件采用双版权行写法（一个 MIT 授权，两个版权人各覆盖各自部分）：
+`Copyright (c) 2024 Trevor Lee` 覆盖模板部分，`Copyright (c) 2026 TQSY114514` 覆盖修改与新增部分。
 
 ---
 
