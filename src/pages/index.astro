@@ -1,5 +1,5 @@
 ---
-// TQSY's Space - V5.4 (新增 AniList & NodeSeek)
+// TQSY's Space - V5.5 (新增 WakaTime & 性能/a11y 优化)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy"; 
@@ -9,6 +9,7 @@ const globalIcon = "https://cdn.phototourl.com/free/2026-05-22-13e55726-5b80-4cf
 // ✨ 1. SVG Sprite 字典：彻底剥离庞大的路径字符串，让 DOM 极致轻量
 const icons = {
   github: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
+  wakatime: "M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12c0-6.627-5.372-12-12-12zm-.008 3.525a8.475 8.475 0 1 1 0 16.95 8.475 8.475 0 0 1 0-16.95zm0 2.543a5.932 5.932 0 1 0 0 11.864 5.932 5.932 0 0 0 0-11.864zm0 2.543a3.39 3.39 0 1 1 0 6.779 3.39 3.39 0 0 1 0-6.779z",
   modelscope: "M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18-.21 0-.41-.06-.57-.18l-7.9-4.44A.991.991 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18.21 0 .41.06.57.18l7.9 4.44c.32.17.53.5.53.88v9zM12 4.15L5.4 7.82l6.6 3.69 6.6-3.69L12 4.15zM4.5 15.66l6.5 3.66v-7.31L4.5 8.35v7.31zm15 0v-7.31l-6.5 3.66v7.31l6.5-3.66z",
   huggingface: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-3.5 6.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm7 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-3.5 8c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z",
   juejin: "M11.963 1.34l-9.28 7.397 2.457 1.956 6.823-5.437 6.823 5.437 2.457-1.956-9.28-7.397zM20.243 14.88l2.457-1.956-10.737-8.547L1.226 12.924l2.457 1.956 8.28-6.59 8.28 6.59zM11.963 10.3l-5.617 4.475 2.457 1.956 3.16-2.52 3.16 2.52 2.457-1.956-5.617-4.475zM11.963 16.5l-3.34 2.66 2.457 1.956.883-.704.883.704 2.457-1.956-3.34-2.66z",
@@ -46,6 +47,7 @@ const navData = [
     category: "💻 Code & Dev",
     items: [
       { name: "GitHub", url: "https://github.com/TQSY114514", icon: "github" },
+      { name: "WakaTime", url: "https://wakatime.com/@b9170f7a-6956-4fb0-905d-ca1dd6b595ab", icon: "wakatime" },
       { name: "ModelScope", url: "https://www.modelscope.cn/profile/TQSY114514", icon: "modelscope" },
       { name: "Hugging Face", url: "https://huggingface.co/TQSY", icon: "huggingface" },
       { name: "Juejin", url: "https://juejin.cn/user/322599780621963", icon: "juejin" },
@@ -324,8 +326,14 @@ const jsonLd = {
 
     .player-time-labels { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-gray); font-family: monospace; letter-spacing: 0.05em; pointer-events: none; }
 
-    .contact-panel { position: fixed; right: 25px; bottom: 25px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; z-index: 1001; pointer-events: none; }
-    body.is-bottom .contact-panel { pointer-events: auto; }
+    /* ✨ a11y 优化：增加 visibility 控制，避免未滑到底部时键盘 Tab 误入焦点 */
+    .contact-panel { 
+      position: fixed; right: 25px; bottom: 25px; 
+      display: flex; flex-direction: column; align-items: flex-end; gap: 8px; 
+      z-index: 1001; pointer-events: none; 
+      visibility: hidden; transition: visibility 0.4s;
+    }
+    body.is-bottom .contact-panel { pointer-events: auto; visibility: visible; }
 
     .email-chip { 
       --chip-x: 40px; --chip-op: 0;
@@ -477,6 +485,7 @@ const jsonLd = {
       const ctx = particleCanvas.getContext('2d');
       const getParticleCount = (w) => w > 768 ? 85 : 30;
       const RADIUS = 2.4; const DIAMETER = RADIUS * 2; const CONNECT_DISTANCE = 145; const BASE_SPEED = 34; 
+      const CONNECT_DISTANCE_SQ = CONNECT_DISTANCE * CONNECT_DISTANCE; // ✨ 平方距离预计算
       const MOUSE_RADIUS = 120; const MOUSE_FORCE = 400;  
 
       let width = 0; let height = 0; let dpr = 1;
@@ -537,10 +546,14 @@ const jsonLd = {
           }
         }
 
+        // ✨ 优化：先通过 dx^2 + dy^2 剔除绝大部分粒子，避免每帧执行数千次 Math.hypot
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
-            const a = particles[i]; const b = particles[j]; const dist = Math.hypot(a.x - b.x, a.y - b.y);
-            if (dist < CONNECT_DISTANCE) {
+            const a = particles[i]; const b = particles[j];
+            const dx = a.x - b.x; const dy = a.y - b.y;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < CONNECT_DISTANCE_SQ) {
+              const dist = Math.sqrt(distSq);
               const strength = 1 - dist / CONNECT_DISTANCE;
               ctx.globalAlpha = strength * 0.75; ctx.strokeStyle = color; ctx.lineWidth = Math.min(DIAMETER, 1.4 * strength);
               ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
@@ -555,7 +568,6 @@ const jsonLd = {
 
       resizeParticles();
       
-      // ✨ 2. 加入 Resize 防抖，防止调整窗口时 Canvas 重绘导致掉帧卡死
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
@@ -629,13 +641,11 @@ const jsonLd = {
       }
     };
 
-    // ✨ Audio Metadata 超时兜底处理
     let metadataTimeout;
     const initAudioDuration = () => {
       clearTimeout(metadataTimeout);
       if (audio.duration && !isNaN(audio.duration)) {
         timeTotal.textContent = formatTime(audio.duration);
-        // ✨ 本地存储键值规范化
         const savedTime = localStorage.getItem('tqsy:v1:audioTime');
         if (savedTime && !isNaN(savedTime)) {
           audio.currentTime = parseFloat(savedTime);
@@ -657,7 +667,6 @@ const jsonLd = {
       metadataTimeout = setTimeout(() => { timeTotal.textContent = "00:00"; }, 3000);
     }
 
-    // ✨ a11y: 结合原生 range 交互逻辑
     progressSlider.addEventListener('input', (e) => {
       if (!audio.duration) return;
       const val = parseFloat(e.target.value);
@@ -666,7 +675,6 @@ const jsonLd = {
       timeCurrent.textContent = formatTime(audio.currentTime);
     });
 
-    // ✨ 7. 极客专属：全局键盘媒体控制 (Global Media Shortcuts)
     window.addEventListener('keydown', (e) => {
       if (e.ctrlKey || e.altKey || e.metaKey) return;
       
