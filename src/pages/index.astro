@@ -624,7 +624,7 @@ const jsonLd = {
 
     const setupMediaSession = () => {
       if ('mediaSession' in navigator) {
-        navigator.mediaSession.metadata = new MediaMetadata({ title: '橙交差点', artist: '初音ミク', album: 'Miku Symphony', artwork: [{ src: 'https://files.catbox.moe/ivuppe.jfif', sizes: '512x512', type: 'image/jpeg' }] });
+        navigator.mediaSession.metadata = new MediaMetadata({ title: '橙交差点', artist: '初音ミク', album: 'Miku Symphony', artwork: [{ src: 'https://files.catbox.moe/etso1h.webp', sizes: '512x512', type: 'image/jpeg' }] });
         navigator.mediaSession.setActionHandler('play', () => { if (audio.paused) playBtn.click(); });
         navigator.mediaSession.setActionHandler('pause', () => { if (!audio.paused) playBtn.click(); });
       }
