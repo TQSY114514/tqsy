@@ -1,6 +1,6 @@
 # 第三方声明 / Third-Party Notices
 
-本项目的结构脚手架源自 `astro-micro` 模板（MIT License）。2026-10-18 精简后，仓库内已不含该模板的原样文件，版权声明仍按 MIT 要求保留。
+本项目的结构脚手架源自 `astro-micro` 模板（MIT License）。2026-10-18 精简掉了主题的页面、组件、示例内容与构建产物，但仍有少量原样文件保留：`.gitignore`、`.prettierrc.mjs`、`.vscode/extensions.json`、`.vscode/launch.json`、`public/favicon.ico`。这些文件的版权仍归模板作者，故 `LICENSE` 采用双版权行。
 按 MIT 条款要求，模板的原始版权声明完整保留于下。
 
 `LICENSE` 文件采用双版权行写法（一个 MIT 授权，两个版权人各覆盖各自部分）：
