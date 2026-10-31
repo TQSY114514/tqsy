@@ -1,12 +1,12 @@
 ---
-// TQSY's Space - V5.6 (10 节点全对称核心矩阵 & SVG 瘦身优化)
+// TQSY's Space - V5.7 (移除闲置模糊 & 工程序号标题 & 帧循环样式缓存)
 const title = "TQSY's Space";
 const description = "Welcome to Weather Holy Salt · TQSY's personal space 🪐";
 const siteUrl = "https://github.com/TQSY114514/tqsy"; 
 
 const globalIcon = "https://files.catbox.moe/vui2ub.jpg";
 
-// ✨ 1. SVG Sprite 字典：仅保留 10 个核心节点的图标路径，DOM 极致轻量
+// ✨ 1. SVG Sprite 字典：仅保留 10 个核心节点的图标路径，DOM 极致轻量(删除了wakatime,syosetu,anilist,watcha,酷狗,niconico,raddit,小红书,即刻,微博,ModelScope,Hugging Face,touchgal,掘金,facebook,ins,youtube,pixai,pixiv,贴吧,编程猫)
 const icons = {
   github: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
   nodeseek: "M12 2L3 7v10l9 5 9-5V7l-9-5zm0 2.2l6.9 3.8-6.9 3.8-6.9-3.8L12 4.2zM5 8.7l6 3.3v6.7l-6-3.3V8.7zm8 10v-6.7l6-3.3v6.7l-6 3.3z",
@@ -22,7 +22,7 @@ const icons = {
 
 const navData = [
   {
-    category: "💻 Code & Dev",
+    category: "01 // CODE & DEV",
     items: [
       { name: "GitHub", url: "https://github.com/TQSY114514", icon: "github" },
       { name: "NodeSeek", url: "https://www.nodeseek.com/space/69761#/general", icon: "nodeseek" },
@@ -31,14 +31,14 @@ const navData = [
     ]
   },
   {
-    category: "🎮 Gaming",
+    category: "02 // GAMING",
     items: [
       { name: "Steam", url: "https://steamcommunity.com/profiles/76561199885694539/", icon: "steam" },
       { name: "Xbox", url: "https://www.xbox.com/en-SG/play/user/TQSY9851", icon: "xbox" }
     ]
   },
   {
-    category: "🌍 Media & ACG",
+    category: "03 // MEDIA & ACG",
     items: [
       { name: "Bilibili", url: "https://space.bilibili.com/1180124107", icon: "bilibili" },
       { name: "Bangumi", url: "https://bangumi.tv/user/tqsy114514", icon: "bangumi" },
@@ -145,10 +145,12 @@ const jsonLd = {
     .bg-glow-1 { 
       position: absolute; top: -20%; right: -20%; width: 80vmax; height: 80vmax; 
       background: radial-gradient(closest-side, rgba(0, 207, 181, 0.15) 0%, rgba(0, 207, 181, 0) 100%); 
+      animation: aurora-1 10s infinite ease-in-out;
     }
     .bg-glow-2 { 
       position: absolute; bottom: -20%; left: -20%; width: 80vmax; height: 80vmax; 
       background: radial-gradient(closest-side, rgba(0, 163, 224, 0.12) 0%, rgba(0, 163, 224, 0) 100%); 
+      animation: aurora-2 12s infinite ease-in-out;
     }
     .particle-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
     
@@ -162,10 +164,6 @@ const jsonLd = {
 
     @keyframes aurora-1 { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; } 50% { transform: translate(-5%, 5%) scale(1.1); opacity: 1; } }
     @keyframes aurora-2 { 0%, 100% { transform: translate(0, 0) scale(1.1); opacity: 1; } 50% { transform: translate(5%, -5%) scale(0.9); opacity: 0.6; } }
-    body.is-idle .bg-glow-1 { animation: aurora-1 10s infinite ease-in-out; }
-    body.is-idle .bg-glow-2 { animation: aurora-2 12s infinite ease-in-out; }
-
-    @media (hover: hover) { body.is-idle .nav-list:hover .nav-item { opacity: 1; filter: blur(0); } body.is-idle .nav-list:hover .category-title { opacity: 0.8; } }
 
     .hero { height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; user-select: none; -webkit-user-select: none; }
 
@@ -186,12 +184,12 @@ const jsonLd = {
     .container { max-width: 580px; margin: 0 auto; padding: 0 20px 250px 20px; }
 
     .category-title {
-      font-size: 11px; font-weight: 700; color: var(--text-gray); letter-spacing: 0.25em; text-transform: uppercase;
+      font-family: monospace;
+      font-size: 11px; font-weight: 700; color: var(--text-gray); letter-spacing: 0.2em; text-transform: uppercase;
       margin: 40px 0 16px 12px; opacity: 0; transform: translateY(20px);
-      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), opacity 1.5s ease-in-out;
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
     }
     .category-title.show { opacity: 0.8; transform: translateY(0); }
-    body.is-idle .category-title { opacity: 0.3; }
 
     .nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 8px; }
 
@@ -204,7 +202,7 @@ const jsonLd = {
       display: flex; align-items: center; justify-content: space-between; 
       padding: 20px 24px; border-radius: 24px; text-decoration: none; 
       color: var(--text-dark); font-weight: 600; opacity: 0; transform: translateY(30px);
-      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background-color 0.5s var(--ease), filter 1.5s ease-in-out;
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background-color 0.5s var(--ease);
       user-select: none; -webkit-user-select: none; height: 100%;
     }
     .nav-item:hover, .nav-item:active { will-change: transform, opacity; }
@@ -221,7 +219,6 @@ const jsonLd = {
       .nav-item.show:hover svg { transform: scale(1.1); color: var(--miku-green); }
     }
     .nav-item.show:active { transform: scale(0.97); background: var(--glass-hover); transition: transform 0.1s, background 0.1s; }
-    body.is-idle .nav-item { opacity: 0.5; filter: blur(1px); }
 
     .source-footer { text-align: center; margin-top: 60px; opacity: 0; animation: fadeIn 1.5s var(--ease) 1s forwards; }
     @keyframes fadeIn { to { opacity: 1; } }
@@ -309,9 +306,9 @@ const jsonLd = {
 
     @media (prefers-reduced-motion: reduce) {
       *, ::before, ::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-      .nav-item, .category-title { opacity: 1; transform: translateY(0); filter: none !important; }
+      .nav-item, .category-title { opacity: 1; transform: translateY(0); }
       .email-chip { opacity: 1; transform: translateX(0) !important; }
-      body.is-idle .bg-glow-1, body.is-idle .bg-glow-2 { animation: none !important; } 
+      .bg-glow-1, .bg-glow-2 { animation: none !important; } 
       .hero h1 { filter: none !important; opacity: 1 !important; transform: none !important; }
       .player-card { opacity: 1 !important; transform: none !important; animation: none !important; }
     }
@@ -413,14 +410,6 @@ const jsonLd = {
     if (typeTarget) typeLoop();
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let idleTimer;
-    const resetIdleTimer = () => {
-      document.body.classList.remove('is-idle');
-      clearTimeout(idleTimer);
-      if (!prefersReducedMotion) idleTimer = setTimeout(() => { document.body.classList.add('is-idle'); }, 5000); 
-    };
-    ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'].forEach(evt => window.addEventListener(evt, resetIdleTimer, { passive: true }));
-    resetIdleTimer();
 
     const particleCanvas = document.getElementById('particleCanvas');
     if (particleCanvas && !prefersReducedMotion) {
@@ -437,7 +426,13 @@ const jsonLd = {
       window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
       window.addEventListener('mouseout', () => { mouse.x = -1000; mouse.y = -1000; });
 
-      const getParticleColor = () => getComputedStyle(document.documentElement).getPropertyValue('--particle-theme').trim() || 'rgba(120, 120, 128, 0.3)';
+      // ✨ 缓存粒子颜色，仅在初始化与系统深浅色切换时更新，避免 rAF 每帧读取 getComputedStyle
+      let cachedParticleColor = 'rgba(120, 120, 128, 0.3)';
+      const updateParticleColor = () => {
+        cachedParticleColor = getComputedStyle(document.documentElement).getPropertyValue('--particle-theme').trim() || 'rgba(120, 120, 128, 0.3)';
+      };
+      updateParticleColor();
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateParticleColor);
 
       const resizeParticles = () => {
         dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -469,7 +464,6 @@ const jsonLd = {
         const dt = Math.min((now - lastTime) / 1000, 0.033);
         lastTime = now;
         ctx.clearRect(0, 0, width, height);
-        const color = getParticleColor();
 
         for (const particle of particles) {
           const dx = particle.x - mouse.x; const dy = particle.y - mouse.y; const dist = Math.hypot(dx, dy);
@@ -496,13 +490,13 @@ const jsonLd = {
             if (distSq < CONNECT_DISTANCE_SQ) {
               const dist = Math.sqrt(distSq);
               const strength = 1 - dist / CONNECT_DISTANCE;
-              ctx.globalAlpha = strength * 0.75; ctx.strokeStyle = color; ctx.lineWidth = Math.min(DIAMETER, 1.4 * strength);
+              ctx.globalAlpha = strength * 0.75; ctx.strokeStyle = cachedParticleColor; ctx.lineWidth = Math.min(DIAMETER, 1.4 * strength);
               ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
             }
           }
         }
 
-        ctx.globalAlpha = 1; ctx.fillStyle = color;
+        ctx.globalAlpha = 1; ctx.fillStyle = cachedParticleColor;
         for (const particle of particles) { ctx.beginPath(); ctx.arc(particle.x, particle.y, RADIUS, 0, Math.PI * 2); ctx.fill(); }
         rafId = requestAnimationFrame(stepParticles);
       };
